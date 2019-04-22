@@ -1,0 +1,9 @@
+spring:
+  profiles:
+    active:
+      - common
+      - db
+      - sso
+logging:
+  level:
+    org.springframework.security: debug
