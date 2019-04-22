@@ -1,0 +1,16 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+#  jackson:
+#    date-format: 'yyyy-MM-dd HH:mm:ss'
+#    deserialization:
+#      read_enums_using_to_string: true
+#    serialization:
+#      write_dates_as_timestamps: true
+#      write_enums_using_to_string: true
+
+server:
+  error:
+    include-exception: true
+    include-stacktrace: never
