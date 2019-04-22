@@ -1,0 +1,4 @@
+# MBG自动生成的文件路径
+src/test/java/top/sunriseydy/syhthems/db/mapper/*
+src/test/java/top/sunriseydy/syhthems/db/model/*
+src/test/resources/top/sunriseydy/syhthems/db/mapper/*
