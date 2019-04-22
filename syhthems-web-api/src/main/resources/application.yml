@@ -1,0 +1,17 @@
+server:
+  port: 8082
+
+spring:
+  profiles:
+    active:
+      - common
+      - db
+      - web
+
+syhthems:
+  security:
+    sso-server: http://localhost:8081
+
+logging:
+  level:
+    org.springframework.security: debug
