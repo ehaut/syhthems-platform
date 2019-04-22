@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="top.sunriseydy.syhthems.db.base.CustomBaseMapper"/>
+            <property name="useMapperCommentGenerator" value="true"/>
+            <property name="generateColumnConsts" value="true"/>
+            <property name="beginningDelimiter" value="`"/>
+            <property name="endingDelimiter" value="`"/>
+            <property name="lombok" value="Data"/>
+        </plugin>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="false"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/syhthems?nullCatalogMeansCurrent=true"
+                        userId="syhthems"
+                        password="syhthems">
+        </jdbcConnection>
+        <!--实体类-->
+        <javaModelGenerator targetPackage="top.sunriseydy.syhthems.db.model" targetProject="syhthems-db/src/test/java">
+            <property name="rootClass" value="top.sunriseydy.syhthems.db.model.BaseModel"/>
+        </javaModelGenerator>
+        <!--mapper映射文件-->
+        <sqlMapGenerator targetPackage="top.sunriseydy.syhthems.db.mapper"
+                         targetProject="syhthems-db/src/test/resources"/>
+        <!--mapper接口-->
+        <javaClientGenerator targetPackage="top.sunriseydy.syhthems.db.mapper" targetProject="syhthems-db/src/test/java"
+                             type="XMLMAPPER"/>
+
+        <!--<table tableName="country">-->
+        <!--&lt;!&ndash;mysql 配置&ndash;&gt;-->
+        <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+        <!--</table>-->
+        <table tableName="sys_user" domainObjectName="User" mapperName="UserMapper">
+            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="user_password" property="password"/>
+            <columnOverride column="user_status" javaType="top.sunriseydy.syhthems.db.enums.UserStatusEnum"
+                            typeHandler="top.sunriseydy.syhthems.db.handler.BaseEnumTypeHandler"/>
+        </table>
+        <table tableName="sys_role" domainObjectName="Role" mapperName="RoleMapper">
+            <generatedKey column="role_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_role_menu" domainObjectName="RoleMenu" mapperName="RoleMenuMapper">
+            <generatedKey column="srm_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_user_role" domainObjectName="UserRole" mapperName="UserRoleMapper">
+            <generatedKey column="sur_id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="sys_menu" domainObjectName="Menu" mapperName="MenuMapper">
+            <generatedKey column="menu_id" sqlStatement="Mysql" identity="true"/>
+            <columnOverride column="type" javaType="top.sunriseydy.syhthems.db.enums.MenuTypeEnum"
+                            typeHandler="top.sunriseydy.syhthems.db.handler.BaseEnumTypeHandler"/>
+        </table>
+    </context>
+</generatorConfiguration>
