@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.sunriseydy.syhthems.db.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="top.sunriseydy.syhthems.db.model.User">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="user_password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="header" jdbcType="VARCHAR" property="header"/>
+        <result column="user_status" jdbcType="VARCHAR" property="userStatus"
+                typeHandler="top.sunriseydy.syhthems.db.handler.BaseEnumTypeHandler"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="first_login" jdbcType="VARCHAR" property="firstLogin"/>
+        <result column="user_description" jdbcType="VARCHAR" property="userDescription"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="last_update_by" jdbcType="BIGINT" property="lastUpdateBy"/>
+    </resultMap>
+</mapper>

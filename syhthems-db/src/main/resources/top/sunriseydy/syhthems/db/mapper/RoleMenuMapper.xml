@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.sunriseydy.syhthems.db.mapper.RoleMenuMapper">
+    <resultMap id="BaseResultMap" type="top.sunriseydy.syhthems.db.model.RoleMenu">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="srm_id" jdbcType="BIGINT" property="srmId"/>
+        <result column="role_id" jdbcType="BIGINT" property="roleId"/>
+        <result column="menu_id" jdbcType="BIGINT" property="menuId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime"/>
+        <result column="last_update_by" jdbcType="BIGINT" property="lastUpdateBy"/>
+    </resultMap>
+</mapper>
