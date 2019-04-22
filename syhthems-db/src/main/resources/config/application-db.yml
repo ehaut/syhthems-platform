@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:3306}/${DATASOURCE_DATABASE:syhthems}?useUnicode=true&useSSL=false&characterEncoding=utf-8
+    username: ${DATASOOURCE_USERNAME:syhthems}
+    password: ${DATASOURCE_PASSWORD:syhthems}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      min-idle: 1
+      initial-size: 1
+      max-active: 10
+  redis:
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: 1
+    database: 1
+  cache:
+    type: redis
+mapper:
+  identity: MYSQL
+  not-empty: false
+  safe-delete: true
+  safe-update: true
+  mappers:
+    - top.sunriseydy.syhthems.db.base.CustomBaseMapper
+
+mybatis:
+  type-handlers-package: "top.sunriseydy.syhthems.db.handler"
+  configuration:
+    default-enum-type-handler: top.sunriseydy.syhthems.db.handler.BaseEnumTypeHandler # 注意：自定义的枚举类处理器只能处理实现了top.sunriseydy.syhthems.common.enums.BaseEnum接口的枚举
+
+logging:
+  level:
+    top.sunriseydy.syhthems.db.mapper: debug # 显示SQL语句
+
