@@ -179,7 +179,6 @@
     </dependencyManagement>
 
     <build>
-        <finalName>syhthems-parent</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
