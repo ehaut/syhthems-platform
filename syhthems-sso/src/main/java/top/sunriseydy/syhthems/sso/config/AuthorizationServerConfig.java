@@ -45,9 +45,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Autowired
     SyhthemsProperties syhthemsProperties;
 
+    @Autowired
+    private ClientDetailsService clientDetailsService;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.jdbc(dataSource).passwordEncoder(passwordEncoder)
+        clients.withClientDetails(clientDetailsService)
                     /*.withClient("syhthems-web")
                     .secret(passwordEncoder.encode("sunriseydy-syhthems-web-secret"))
                     .authorizedGrantTypes("password", "refresh_token")
