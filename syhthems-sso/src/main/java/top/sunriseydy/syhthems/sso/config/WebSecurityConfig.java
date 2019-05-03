@@ -28,13 +28,13 @@ import top.sunriseydy.syhthems.sso.handler.*;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/static/**", "/favicon.ico");
     }
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     @Bean
     public CustomAuthenticationEntryPoint customAuthenticationEntryPoint() {
@@ -73,19 +73,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.exceptionHandling()
-                .authenticationEntryPoint(customAuthenticationEntryPoint())
-                .accessDeniedHandler(customAccessDeniedHandler())
+        http
+            .headers()
+                .httpStrictTransportSecurity().disable()
             .and()
                 .authorizeRequests()
-                    .antMatchers("/oauth/*", "/error").permitAll()
+                    .antMatchers("/error", "/.well-known/*").permitAll()
                     .anyRequest().authenticated()
             .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .failureHandler(customAuthenticationFailureHandler())
-                .successHandler(customAuthenticationSuccessHandler())
+                // .failureHandler(customAuthenticationFailureHandler())
+                // .successHandler(customAuthenticationSuccessHandler())
                 .permitAll()
             .and()
                 .logout().logoutSuccessHandler(customLogoutSuccessHandler())
