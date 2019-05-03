@@ -9,6 +9,8 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
+import org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -38,9 +40,9 @@ import java.util.stream.Collectors;
 @Slf4j
 @RestControllerAdvice
 @Order(value = BaseConstants.DEFAULT_ORDER)
+@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 public class CustomExceptionHandler {
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({SystemException.class})
     public ResultVO systemExceptionHandler(final SystemException e) {
         log.error("-----> 系统异常：{}", e.getMessage());
@@ -54,7 +56,6 @@ public class CustomExceptionHandler {
      * @param e IllegalArgumentException
      * @return ResultEnum.ILLEGAL_ARGUMENT
      */
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(IllegalArgumentException.class)
     public ResultVO illegalArgumentExceptionHandler(final IllegalArgumentException e) {
         log.error("-----> 参数异常：{}", e.getMessage());
@@ -62,7 +63,6 @@ public class CustomExceptionHandler {
         return ResultUtils.error(ResultEnum.ILLEGAL_ARGUMENT.getKey(), e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResultVO methodArgumentTypeMismatchExceptionHandler(final MethodArgumentTypeMismatchException e) {
         log.error("-----> Controller 参数异常：{}", e.getMessage());
@@ -70,7 +70,6 @@ public class CustomExceptionHandler {
         return ResultUtils.error(ResultEnum.ILLEGAL_CONTROLLER_ARGUMENT);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public ResultVO missingServletRequestParameterExceptionHandler(final MissingServletRequestParameterException e) {
         log.error("-----> Controller 缺少参数异常：{}", e.getMessage());
@@ -78,7 +77,6 @@ public class CustomExceptionHandler {
         return ResultUtils.error(ResultEnum.MISSING_SERVLET_REQUEST_PARAMETER);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResultVO httpMessageNotReadableExceptionHandler(final HttpMessageNotReadableException e) {
         log.error("-----> 请求参数读取异常：{}", e.getMessage());
@@ -86,7 +84,6 @@ public class CustomExceptionHandler {
         return ResultUtils.error(ResultEnum.HTTP_MESSAGE_NOT_READABLE);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(ValidationException.class)
     public Object badArgumentExceptionHandler(ValidationException e) {
         e.printStackTrace();
@@ -101,7 +98,6 @@ public class CustomExceptionHandler {
         return ResultUtils.error(ResultEnum.ILLEGAL_CONTROLLER_ARGUMENT);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({ServiceException.class})
     public ResultVO serviceExceptionHandler(final ServiceException e) {
         log.error("-----> 服务异常：{}", e.getMessage());
@@ -109,7 +105,6 @@ public class CustomExceptionHandler {
         return ResultUtils.error(e.getResultEnum().getKey(), e.getMessage());
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({SQLException.class, DataAccessException.class})
     public ResultVO databaseExceptionHandler(final Throwable e) {
         log.error("-----> 数据库异常：{}", e.getMessage());
@@ -117,7 +112,6 @@ public class CustomExceptionHandler {
         return ResultUtils.error(ResultEnum.DATABASE_ERROR);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({BadCredentialsException.class, AuthenticationException.class})
     public ResultVO authenticationExceptionHandler(final Throwable e) {
         log.error("-----> 身份认证异常：{}", e.getMessage());
@@ -125,7 +119,6 @@ public class CustomExceptionHandler {
         return ResultUtils.error(ResultEnum.AUTHENCATION_ERROR);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({AccessDeniedException.class})
     public ResultVO accessExceptionHandler(final Throwable e) {
         log.error("-----> 访问权限异常：{}", e.getMessage());
@@ -133,7 +126,6 @@ public class CustomExceptionHandler {
         return ResultUtils.error(ResultEnum.ACCESS_ERROR);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({UsernameNotFoundException.class})
     public ResultVO accountNotFoundExceptionHandler(final Throwable e) {
         log.error("-----> 账号不存在异常：{}", e.getMessage());
@@ -141,7 +133,6 @@ public class CustomExceptionHandler {
         return ResultUtils.error(ResultEnum.ACCOUNT_NOT_FOUND_ERROR);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResultVO urlNotFoundExceptionHandler(final HttpServletRequest request, final Throwable e) {
         log.error("-----> {} URL不存在异常：{}", request.getRequestURI(), e.getMessage());
@@ -149,7 +140,18 @@ public class CustomExceptionHandler {
         return ResultUtils.error(ResultEnum.URL_NOT_FOUND);
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    /**
+     * OAuth2Exception 异常处理，拦截器中的异常是由 {@link DefaultWebResponseExceptionTranslator} 处理
+     * @param e OAuth2Exception
+     * @return ResultVO
+     */
+    @ExceptionHandler(OAuth2Exception.class)
+    public ResultVO oAuth2ExceptionHandler(OAuth2Exception e) {
+        log.error("-----> OAuth2 认证异常：{}", e.getOAuth2ErrorCode());
+        e.printStackTrace();
+        return ResultUtils.error(ResultEnum.AUTHENCATION_ERROR.getKey(), e.getOAuth2ErrorCode());
+    }
+
     @ExceptionHandler({Exception.class})
     public ResultVO globalExceptionHandler(final Exception e) {
         log.error("-----> 全局异常：{} : {}", e.getClass().getName(), e.getMessage());
