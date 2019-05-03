@@ -61,6 +61,8 @@
         <commons-io.version>2.6</commons-io.version>
         <jedis.version>2.9.3</jedis.version>
         <spring-session-redis.version>2.1.5.RELEASE</spring-session-redis.version>
+        <nimbus-jose-jwt.version>7.1</nimbus-jose-jwt.version>
+        <spring-security.version>5.1.5.RELEASE</spring-security.version>
     </properties>
 
     <dependencyManagement>
@@ -75,6 +77,16 @@
                 <groupId>org.springframework.session</groupId>
                 <artifactId>spring-session-data-redis</artifactId>
                 <version>${spring-session-redis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-resource-server</artifactId>
+                <version>${spring-security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-oauth2-jose</artifactId>
+                <version>${spring-security.version}</version>
             </dependency>
 
 

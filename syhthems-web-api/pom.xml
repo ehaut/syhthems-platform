@@ -14,10 +14,10 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!--Spring Boot Starter-->
+        <!--Spring-->
         <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-resource-server</artifactId>
         </dependency>
 
         <!-- syhthems 相关依赖-->
