@@ -16,8 +16,8 @@ import javax.validation.constraints.NotBlank;
 class SecurityProperties {
     /**
      * SSO 单点登录系统的地址
-     * 默认值为 "http://localhost:8081"
+     * 默认值为 "sso"
      */
     @NotBlank
-    private String ssoServer = "http://localhost:8081";
+    private String ssoServer = "/sso";
 }
