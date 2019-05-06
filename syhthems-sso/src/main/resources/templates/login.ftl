@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Login</title>
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="${springMacroRequestContext.contextPath}/static/css/bootstrap.min.css" type="text/css"/>
 </head>
 <body class="bg-dark">
 <div class="container py-5">
@@ -41,7 +41,7 @@
                             <div class="card-body">
 
                                 <form class="form" role="form" autocomplete="on" id="formLogin" novalidate=""
-                                      action="/login" method="POST">
+                                      action="${springMacroRequestContext.contextPath}/login" method="POST">
                                     <div class="form-group">
                                         <label for="username">Username</label>
                                         <input type="text" class="form-control form-control-lg rounded-0"
