@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -20,6 +21,7 @@ import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFacto
 import top.sunriseydy.syhthems.common.properties.SyhthemsProperties;
 
 import javax.sql.DataSource;
+import java.security.KeyPair;
 
 /**
  * OAuth2 认证服务器配置
@@ -72,11 +74,16 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+    public KeyPair keyPair() {
         KeyStoreKeyFactory keyStoreKeyFactory =
                 new KeyStoreKeyFactory(new ClassPathResource("syhthems.jks"), "syhthems-sunriseydy".toCharArray());
-        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("syhthems"));
+        return keyStoreKeyFactory.getKeyPair("syhthems");
+    }
+
+    @Bean
+    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+        converter.setKeyPair(keyPair());
         return converter;
     }
 
