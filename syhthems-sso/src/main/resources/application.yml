@@ -4,6 +4,11 @@ spring:
       - common
       - db
       - sso
+server:
+  port: 8081
 logging:
   level:
     org.springframework.security: debug
+syhthems:
+  security:
+    sso-server: https://sso.syhthems.sunriseydy.top/sso
