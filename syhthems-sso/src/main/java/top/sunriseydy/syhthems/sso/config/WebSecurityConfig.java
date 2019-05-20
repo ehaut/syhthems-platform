@@ -16,6 +16,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import top.sunriseydy.syhthems.common.properties.CorsProperties;
 import top.sunriseydy.syhthems.sso.handler.*;
 
 /**
@@ -89,9 +93,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .headers()
                 .httpStrictTransportSecurity().disable()
+                .defaultsDisabled().cacheControl().and()
             .and()
                 .authorizeRequests()
-                    .antMatchers("/error", "/.well-known/*").permitAll()
+                    .antMatchers("/error",
+                            "/.well-known/*",
+                            "/oauth/token",
+                            "/register",
+                            "/login",
+                            "/user/check_user_name",
+                            "/user/check_user_email").permitAll()
                     .anyRequest().authenticated()
             .and()
                 .formLogin()

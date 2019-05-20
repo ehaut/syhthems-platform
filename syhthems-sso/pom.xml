@@ -48,6 +48,7 @@
                 <filtering>true</filtering>
                 <excludes>
                     <exclude>*.jks</exclude>
+                    <exclude>static/webfonts/*</exclude>
                 </excludes>
             </resource>
             <resource>
@@ -55,6 +56,7 @@
                 <filtering>false</filtering>
                 <includes>
                     <include>*.jks</include>
+                    <include>static/webfonts/*</include>
                 </includes>
             </resource>
         </resources>

@@ -41,6 +41,7 @@ public class CustomAuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        // TODO 解决用户更新容易出现的乐观锁问题
         CustomUserDetails userDetails = userUtils.getCustomUserDetailsFromSecurityContextHolderWithUsername();
         if (userDetails == null) {
             throw new ServiceException("未能获取用户对象");

@@ -12,3 +12,7 @@ logging:
 syhthems:
   security:
     sso-server: https://sso.syhthems.sunriseydy.top/sso
+  cors:
+    allowed-origins: '*' # 设置允许的源
+    allowed-methods: GET, PUT, POST, DELETE, OPTIONS # 设置允许的请求方法
+    allowed-headers: '*' # 设置允许的头
