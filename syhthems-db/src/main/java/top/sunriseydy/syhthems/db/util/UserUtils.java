@@ -9,7 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import top.sunriseydy.syhthems.db.model.CustomUserDetails;
@@ -144,10 +144,15 @@ public class UserUtils {
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return null;
         }
+        String username;
+        if (authentication instanceof JwtAuthenticationToken) {
+            username = ((JwtAuthenticationToken) authentication).getTokenAttributes().get("user_name").toString();
+        } else {
+            username = authentication.getName();
+        }
         try {
-            String username = authentication.getName();
             return ((CustomUserDetails) userDetailsService.loadUserByUsername(username)).erasePassword();
-        } catch (UsernameNotFoundException e) {
+        } catch (IllegalArgumentException e) {
             return null;
         }
     }
@@ -161,6 +166,8 @@ public class UserUtils {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
             return null;
+        } else if (authentication instanceof JwtAuthenticationToken) {
+            return ((JwtAuthenticationToken) authentication).getTokenAttributes().get("user_name").toString();
         } else {
             return authentication.getName();
         }
