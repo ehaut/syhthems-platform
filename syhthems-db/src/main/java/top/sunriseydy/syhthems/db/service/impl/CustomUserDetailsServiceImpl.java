@@ -1,7 +1,6 @@
 package top.sunriseydy.syhthems.db.service.impl;
 
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +23,6 @@ import java.util.List;
  * @author SunriseYDY
  * @date 2019-03-09 23:11
  */
-@Configuration
 @Service
 @Primary
 public class CustomUserDetailsServiceImpl implements UserDetailsService {
