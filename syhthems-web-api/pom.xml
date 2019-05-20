@@ -14,12 +14,6 @@
     <packaging>jar</packaging>
 
     <dependencies>
-        <!--Spring-->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-resource-server</artifactId>
-        </dependency>
-
         <!-- syhthems 相关依赖-->
         <dependency>
             <groupId>top.sunriseydy</groupId>
