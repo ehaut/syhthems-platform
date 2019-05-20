@@ -13,7 +13,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Getter
 @Setter
-class SecurityProperties {
+public class SecurityProperties {
     /**
      * SSO 单点登录系统的地址
      * 默认值为 "sso"

@@ -19,5 +19,5 @@ import javax.validation.Valid;
 @Setter
 public class SyhthemsProperties {
     @Valid
-    private SecurityProperties security = new SecurityProperties();
+    private SecurityProperties security;
 }
