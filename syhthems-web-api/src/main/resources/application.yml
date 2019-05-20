@@ -10,7 +10,7 @@ spring:
 
 syhthems:
   security:
-    sso-server: http://localhost:8081
+    sso-server: http://localhost:8081/sso
 
 logging:
   level:
