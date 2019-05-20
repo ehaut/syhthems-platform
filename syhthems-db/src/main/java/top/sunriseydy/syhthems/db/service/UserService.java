@@ -24,6 +24,20 @@ public interface UserService extends BaseService<User> {
     User selectByUsername(String username);
 
     /**
+     * 根据邮箱来查询用户
+     * @param email
+     * @return
+     */
+    User selectByEmail(String email);
+
+    /**
+     * 根据用户邮箱检测用户是否存在
+     * @param email
+     * @return
+     */
+    Boolean existsWithEmail(String email);
+
+    /**
      * 注册用户
      *
      * @param newUser

@@ -63,10 +63,25 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
      */
     @Override
     public User selectByUsername(String username) {
+        Assert.hasText(username, "用户名字段不能为空");
         User user = new User();
         user.setUsername(username);
         user = super.selectOne(user);
         return user;
+    }
+
+    @Override
+    public User selectByEmail(String email) {
+        Assert.hasText(email, "邮箱字段不能为空");
+        User user = new User();
+        user.setEmail(email);
+        user = super.selectOne(user);
+        return user;
+    }
+
+    @Override
+    public Boolean existsWithEmail(String email) {
+        return null != this.selectByEmail(email);
     }
 
     /**
