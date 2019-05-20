@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +40,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     @Autowired
     RoleMenuService roleMenuService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     /**
      * 根据用户名检测用户是否存在
@@ -78,6 +82,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         Assert.hasText(newUser.getUsername(), "注册失败，用户名为空");
         Assert.hasText(newUser.getPassword(), "注册失败，用户密码为空");
         Assert.isTrue(!this.existsWithUsername(newUser.getUsername()), "注册失败，用户名已存在");
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         if (super.insertSelective(newUser) == 0) {
             throw new ServiceException("sorry，注册失败");
         }
