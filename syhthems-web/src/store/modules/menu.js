@@ -7,7 +7,7 @@ const state = {
 const getters = {
   // 获取指定parentId的rawMenus数组
   childRawMenusof: (state, getters, rootState, rootGetters) => (parentId) => {
-    return state.rawMenus.find(rawMenu => rawMenu.parentId === parentId)
+    return state.rawMenus.filter(rawMenu => rawMenu.parentId === parentId)
   },
 
   getMenus: (state, getters) => {
