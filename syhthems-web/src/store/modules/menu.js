@@ -42,7 +42,7 @@ const getters = {
     routes.push({
       path: '*',
       components: {
-        default: require('../../components/SyhthemsNotFound').default,
+        default: require('../../pages/SyhthemsNotFound').default,
         main: require('../../components/SyhthemsMain').default,
         toolbar: require('../../components/SyhthemsToolbar').default
       },
@@ -59,7 +59,7 @@ const getters = {
         return {
           path: rawMenu.path,
           components: {
-            default: require(`../../components/${rawMenu.menuComponent}`).default,
+            default: require(`../../pages/${rawMenu.menuComponent}`).default,
             main: require('../../components/SyhthemsMain').default,
             toolbar: require('../../components/SyhthemsToolbar').default
           },

@@ -8,7 +8,7 @@ function route (path, name, component, children) {
     path,
     name,
     components: {
-      default: require(`./components/${component}`).default,
+      default: require(`./pages/${component}`).default,
       main: require('./components/SyhthemsMain').default,
       toolbar: require('./components/SyhthemsToolbar').default
     },
