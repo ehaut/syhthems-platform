@@ -15,7 +15,7 @@ const getters = {
       return []
     }
     // 过滤掉类型为按钮的数据
-    return getters.rawMenus2Menus(state.rawMenus.filter(rawMenu => rawMenu.type === '0'))
+    return getters.rawMenus2Menus(state.rawMenus.filter(rawMenu => (rawMenu.type === '0' && rawMenu.parentId === 0)))
   },
 
   rawMenus2Menus: (state, getters) => (rawMenus) => {
