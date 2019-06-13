@@ -32,7 +32,6 @@
     </dependencies>
 
     <build>
-        <finalName>syhthems-web-api</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
