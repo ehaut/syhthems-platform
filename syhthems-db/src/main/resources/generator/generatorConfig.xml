@@ -43,25 +43,9 @@
         <!--&lt;!&ndash;mysql 配置&ndash;&gt;-->
         <!--<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
         <!--</table>-->
-        <table tableName="sys_user" domainObjectName="User" mapperName="UserMapper">
-            <generatedKey column="user_id" sqlStatement="Mysql" identity="true"/>
-            <columnOverride column="user_password" property="password"/>
-            <columnOverride column="user_status" javaType="top.sunriseydy.syhthems.db.enums.UserStatusEnum"
-                            typeHandler="top.sunriseydy.syhthems.db.handler.BaseEnumTypeHandler"/>
+        <table tableName="data_stream">
+            <generatedKey column="data_stream_id" sqlStatement="Mysql" identity="true"/>
         </table>
-        <table tableName="sys_role" domainObjectName="Role" mapperName="RoleMapper">
-            <generatedKey column="role_id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="sys_role_menu" domainObjectName="RoleMenu" mapperName="RoleMenuMapper">
-            <generatedKey column="srm_id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="sys_user_role" domainObjectName="UserRole" mapperName="UserRoleMapper">
-            <generatedKey column="sur_id" sqlStatement="Mysql" identity="true"/>
-        </table>
-        <table tableName="sys_menu" domainObjectName="Menu" mapperName="MenuMapper">
-            <generatedKey column="menu_id" sqlStatement="Mysql" identity="true"/>
-            <columnOverride column="type" javaType="top.sunriseydy.syhthems.db.enums.MenuTypeEnum"
-                            typeHandler="top.sunriseydy.syhthems.db.handler.BaseEnumTypeHandler"/>
-        </table>
+
     </context>
 </generatorConfiguration>
