@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import top.sunriseydy.syhthems.common.properties.OAuthProperties;
@@ -21,7 +22,8 @@ import java.util.Map;
  * @date 2019-05-16 21:31
  */
 @RestController
-public class UserController extends BaseController {
+@RequestMapping("/web/api")
+public class WebApiUserController extends BaseController {
 
     private final RestTemplate restTemplate;
 
@@ -29,7 +31,7 @@ public class UserController extends BaseController {
 
     private final SyhthemsProperties syhthemsProperties;
 
-    public UserController(RestTemplateBuilder restTemplateBuilder, OAuthProperties oAuthProperties, SyhthemsProperties syhthemsProperties) {
+    public WebApiUserController(RestTemplateBuilder restTemplateBuilder, OAuthProperties oAuthProperties, SyhthemsProperties syhthemsProperties) {
         this.syhthemsProperties = syhthemsProperties;
         restTemplateBuilder.basicAuthentication(oAuthProperties.getClientId(), oAuthProperties.getClientSecret());
         this.restTemplate = restTemplateBuilder.build();

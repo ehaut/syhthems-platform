@@ -16,7 +16,8 @@ import top.sunriseydy.syhthems.db.util.UserUtils;
  * @date 2019-04-15 10:11
  */
 @RestController
-public class HomeController extends BaseController {
+@RequestMapping("/web/api")
+public class WebApiHomeController extends BaseController {
     @Autowired
     UserUtils userUtils;
 
