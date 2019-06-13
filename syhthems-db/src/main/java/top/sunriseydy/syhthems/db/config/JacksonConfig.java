@@ -20,7 +20,6 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.lang.Nullable;
 import org.springframework.util.StringUtils;
-import top.sunriseydy.syhthems.common.constants.BaseConstants;
 import top.sunriseydy.syhthems.db.model.BaseModel;
 
 import java.io.IOException;
@@ -53,12 +52,14 @@ public class JacksonConfig {
             return builder -> builder
                     // 在序列化时将日期转化为时间戳
                     .featuresToEnable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+                    .featuresToEnable(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS)
                     // 在序列化枚举对象时使用toString方法
                     .featuresToEnable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING)
                     // 在反序列化枚举对象时使用toString方法
                     .featuresToEnable(DeserializationFeature.READ_ENUMS_USING_TO_STRING)
+                    .featuresToEnable(DeserializationFeature.READ_DATE_TIMESTAMPS_AS_NANOSECONDS)
                     // 日期和时间格式："yyyy-MM-dd HH:mm:ss"
-                    .simpleDateFormat(BaseConstants.DATETIME_FORMAT)
+                    // .simpleDateFormat(BaseConstants.DATETIME_FORMAT)
                     .createXmlMapper(false)
                     .timeZone("GMT+8:00")
                     ;
