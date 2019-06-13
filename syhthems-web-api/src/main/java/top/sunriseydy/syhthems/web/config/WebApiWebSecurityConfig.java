@@ -1,8 +1,8 @@
 package top.sunriseydy.syhthems.web.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import top.sunriseydy.syhthems.common.constants.BaseConstants;
 import top.sunriseydy.syhthems.common.properties.CorsProperties;
 import top.sunriseydy.syhthems.web.converter.CustomJwtAuthenticationConverter;
 
@@ -23,7 +24,8 @@ import top.sunriseydy.syhthems.web.converter.CustomJwtAuthenticationConverter;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@Order(BaseConstants.DEFAULT_ORDER + 100)
+public class WebApiWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     CorsProperties corsProperties;
@@ -36,31 +38,32 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * CORS 配置类
      * <p>Reference: https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#cors</p>
-     * @return corsConfigurationSource
+     * @return webApiCorsConfigurationSource
      */
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
+    // @Bean
+    CorsConfigurationSource webApiCorsConfigurationSource() {
         CorsConfiguration configuration = corsProperties.toCorsConfiguration();
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/web/api/**", configuration);
         return source;
     }
 
-    @Bean
-    CustomJwtAuthenticationConverter customJwtAuthenticationConverter() {
+    // @Bean
+    CustomJwtAuthenticationConverter webApiCustomJwtAuthenticationConverter() {
         return new CustomJwtAuthenticationConverter();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors()
-                .configurationSource(corsConfigurationSource())
+                .configurationSource(webApiCorsConfigurationSource())
             .and()
                 .authorizeRequests()
-                    .antMatchers("/login", "/error", "/oauth/token").permitAll()
+                    .antMatchers("/error", "/web/api/oauth/token").permitAll()
                     .anyRequest().authenticated()
             .and()
-                .csrf().disable()
-            .oauth2ResourceServer().jwt().jwtAuthenticationConverter(customJwtAuthenticationConverter());
+                .oauth2ResourceServer().jwt().jwtAuthenticationConverter(webApiCustomJwtAuthenticationConverter())
+            .and().and()
+                .csrf().disable();
     }
 }
