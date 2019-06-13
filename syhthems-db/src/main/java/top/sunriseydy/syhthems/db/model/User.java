@@ -1,9 +1,11 @@
 package top.sunriseydy.syhthems.db.model;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.URL;
 import top.sunriseydy.syhthems.db.enums.UserStatusEnum;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Date;
 
 /**
@@ -34,6 +36,7 @@ public class User extends BaseModel {
      * 邮箱地址
      */
     @Column(name = "`email`")
+    @Email
     private String email;
 
     /**
@@ -46,6 +49,7 @@ public class User extends BaseModel {
      * 用户头像
      */
     @Column(name = "`header`")
+    @URL
     private String header;
 
     /**
