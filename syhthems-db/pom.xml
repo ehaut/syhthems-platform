@@ -72,7 +72,6 @@
     </dependencies>
 
     <build>
-        <finalName>syhthems-db</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
