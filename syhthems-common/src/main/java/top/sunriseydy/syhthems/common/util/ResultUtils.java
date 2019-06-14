@@ -57,4 +57,8 @@ public class ResultUtils {
         return error(ResultEnum.BASE_ERROR);
     }
 
+    public static <T> ResultVO<T> error(String message) {
+        return error(ResultEnum.BASE_ERROR.getKey(), message);
+    }
+
 }
