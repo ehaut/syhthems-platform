@@ -1,0 +1,13 @@
+server:
+  port: 8084
+
+spring:
+  profiles:
+    active:
+      - common
+      - db
+      - device
+
+logging:
+  level:
+    org.springframework.security: debug

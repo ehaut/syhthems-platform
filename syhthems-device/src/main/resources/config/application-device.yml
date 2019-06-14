@@ -1,0 +1,4 @@
+syhthems:
+  influx:
+    influx-db-url: 'http://localhost:9999'
+    admin-token: 'AY1_iUux7FGnSf2NeceE8Lingg_PcwSiW6IQ1e72GSO_-PFNHjKAY7ozs6jNfrUbSriYopXe06ee33wTtHkYdw=='
