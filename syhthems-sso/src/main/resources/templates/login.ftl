@@ -12,7 +12,7 @@
     <script src="${springMacroRequestContext.contextPath}/static/js/bootstrap.min.js"></script>
     <style>
         body {
-            background: url(${springMacroRequestContext.contextPath}/static/images/20160221175327.jpeg) no-repeat;
+            background: url(${springMacroRequestContext.contextPath}/static/images/cloud_and_sunrise.jpeg) no-repeat;
             background-size: cover;
             font-size: 16px;
         }
@@ -70,7 +70,7 @@
         <div class="col-md-12 col-sm-12">
             <div class="row">
                 <form class="form col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4" id="login_form" autocomplete="on"
-                      action="${springMacroRequestContext.contextPath}/login" method="POST">
+                      action="${springMacroRequestContext.contextPath}/sso/login" method="POST">
                     <h3 class="form-title text-info">登录账号</h3>
                     <div>
                         <#if RequestParameters.error?? >
@@ -123,7 +123,7 @@
         <div class="col-md-12 col-sm-12">
             <div class="row">
                 <form class="form col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4" id="register_form" autocomplete="on"
-                      action="${springMacroRequestContext.contextPath}/register" method="POST">
+                      action="${springMacroRequestContext.contextPath}/sso/register" method="POST">
                     <h3 class="form-title text-info">注册账号</h3>
                     <div>
                         <div class="form-group">
@@ -198,7 +198,7 @@
                     dataType: 'json',
                     processData: false,
                     type: 'POST',
-                    url: '${springMacroRequestContext.contextPath}/register',
+                    url: '${springMacroRequestContext.contextPath}/sso/register',
                     success: function (result, status) {
                         if (result.code === 0) {
                             $("#register_success").css("display", "block");
@@ -227,7 +227,7 @@
                     required: true,
                     pattern: '[\\d\\w]+',
                     remote: {
-                        url: "${springMacroRequestContext.contextPath}/user/check_user_name",     //后台处理程序
+                        url: "${springMacroRequestContext.contextPath}/sso/user/check_user_name",     //后台处理程序
                         dataType: "json"            //接受数据格式
                     }
                 },
@@ -242,7 +242,7 @@
                     required: true,
                     email: true,
                     remote: {
-                        url: "${springMacroRequestContext.contextPath}/user/check_user_email",
+                        url: "${springMacroRequestContext.contextPath}/sso/user/check_user_email",
                         dataType: "json"
                     }
                 }
