@@ -13,14 +13,29 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
+    <dependencies>
+        <!-- syhthems 相关依赖 -->
+        <dependency>
+            <groupId>top.sunriseydy</groupId>
+            <artifactId>syhthems-sso</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.sunriseydy</groupId>
+            <artifactId>syhthems-web-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>top.sunriseydy</groupId>
+            <artifactId>syhthems-device</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
-        <finalName>syhthems</finalName>
         <plugins>
             <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <addResources>true</addResources>
                 </configuration>
             </plugin>
         </plugins>
