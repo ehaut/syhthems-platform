@@ -31,6 +31,7 @@
         <module>syhthems-db</module>
         <module>syhthems-sso</module>
         <module>syhthems-web-api</module>
+        <module>syhthems-device</module>
     </modules>
 
     <properties>
@@ -48,6 +49,7 @@
         <syhthems-db.version>0.0.1-SNAPSHOT</syhthems-db.version>
         <syhthems-sso.version>0.0.1-SNAPSHOT</syhthems-sso.version>
         <syhthems-web-api.version>0.0.1-SNAPSHOT</syhthems-web-api.version>
+        <syhthems-device.version>0.0.1-SNAPSHOT</syhthems-device.version>
 
         <!-- 各依赖的版本号 -->
         <lombok.version>1.18.6</lombok.version>
@@ -110,6 +112,11 @@
                 <groupId>top.sunriseydy</groupId>
                 <artifactId>syhthems-web-api</artifactId>
                 <version>${syhthems-web-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.sunriseydy</groupId>
+                <artifactId>syhthems-device</artifactId>
+                <version>${syhthems-device.version}</version>
             </dependency>
 
             <dependency>
