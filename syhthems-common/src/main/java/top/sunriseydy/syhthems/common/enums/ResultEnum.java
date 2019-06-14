@@ -78,6 +78,12 @@ public enum ResultEnum implements BaseEnum<Integer, String> {
      * ServiceException 的默认结果
      */
     SERVICE_ERROR(13, "服务出现异常"),
+
+    PRODUCT_NOT_FOUND(14, "产品不存在"),
+
+    DEVICE_NOT_FOUND(15, "设备不存在"),
+
+    DATA_STREAM_NOT_FOUND(16, "数据流不存在"),
     ;
 
     /**
