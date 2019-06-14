@@ -11,6 +11,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator;
+import org.springframework.validation.BindException;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -96,6 +98,18 @@ public class CustomExceptionHandler {
             return ResultUtils.error(ResultEnum.ILLEGAL_CONTROLLER_ARGUMENT.getKey(), message);
         }
         return ResultUtils.error(ResultEnum.ILLEGAL_CONTROLLER_ARGUMENT);
+    }
+
+    @ExceptionHandler(BindException.class)
+    public Object bindExceptionHandler(BindException e) {
+        e.printStackTrace();
+        String message = "";
+        for (FieldError fieldError : e.getFieldErrors()) {
+            message = "对象：" + fieldError.getObjectName() +
+                    " 字段：" + fieldError.getField() +
+                    " 错误信息：" + fieldError.getDefaultMessage() + "\n";
+        }
+        return ResultUtils.error(ResultEnum.ILLEGAL_CONTROLLER_ARGUMENT.getKey(), message);
     }
 
     @ExceptionHandler({ServiceException.class})
