@@ -3,10 +3,7 @@ package top.sunriseydy.syhthems.sso.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import top.sunriseydy.syhthems.common.util.ResultUtils;
 import top.sunriseydy.syhthems.common.vo.ResultVO;
 import top.sunriseydy.syhthems.db.model.User;
@@ -18,7 +15,8 @@ import top.sunriseydy.syhthems.db.util.UserUtils;
  * @date 2019-04-12 10:27
  */
 @Controller
-public class UserController {
+@RequestMapping("/sso")
+public class SsoUserController {
 
     @Autowired
     UserService userService;

@@ -5,7 +5,3 @@ spring:
     static-path-pattern: /static/**
   session:
     store-type: redis
-
-server:
-  servlet:
-    context-path: /sso

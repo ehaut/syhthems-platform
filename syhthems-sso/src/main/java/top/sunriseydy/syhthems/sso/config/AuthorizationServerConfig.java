@@ -72,6 +72,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authenticationManager(authenticationManager)
                 // 一定要添加自定义的UserDetailsService，不然 refresh token 时会报错
                 .userDetailsService(userDetailsService)
+                .pathMapping("/oauth/token", "/sso/oauth/token")
+                .pathMapping("/oauth/authorize", "/sso/oauth/authorize")
+                .pathMapping("/oauth/confirm_access", "/sso/oauth/confirm_access")
+                .pathMapping("/oauth/error", "/sso/oauth/error")
+                .pathMapping("/oauth/check_token", "/sso/oauth/check_token")
+                .pathMapping("/oauth/token_key", "/sso/oauth/token_key")
         ;
     }
 

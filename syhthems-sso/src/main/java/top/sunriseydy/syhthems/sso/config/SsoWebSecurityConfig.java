@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,6 +20,7 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import top.sunriseydy.syhthems.common.constants.BaseConstants;
 import top.sunriseydy.syhthems.common.properties.CorsProperties;
 import top.sunriseydy.syhthems.sso.handler.*;
 
@@ -30,7 +32,8 @@ import top.sunriseydy.syhthems.sso.handler.*;
  */
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@Order(BaseConstants.DEFAULT_ORDER + 1)
+public class SsoWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -44,27 +47,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public CustomAuthenticationEntryPoint customAuthenticationEntryPoint() {
+    public CustomAuthenticationEntryPoint ssoCustomAuthenticationEntryPoint() {
         return new CustomAuthenticationEntryPoint();
     }
 
     @Bean
-    public CustomAccessDeniedHandler customAccessDeniedHandler() {
+    public CustomAccessDeniedHandler ssoCustomAccessDeniedHandler() {
         return new CustomAccessDeniedHandler();
     }
 
     @Bean
-    public AuthenticationSuccessHandler customAuthenticationSuccessHandler() {
+    public AuthenticationSuccessHandler ssoCustomAuthenticationSuccessHandler() {
         return new CustomAuthenticationSuccessHandler();
     }
 
     @Bean
-    public AuthenticationFailureHandler customAuthenticationFailureHandler() {
+    public AuthenticationFailureHandler ssoCustomAuthenticationFailureHandler() {
         return new CustomAuthenticationFailureHandler();
     }
 
     @Bean
-    public LogoutSuccessHandler customLogoutSuccessHandler() {
+    public LogoutSuccessHandler ssoCustomLogoutSuccessHandler() {
         return new CustomLogoutSuccessHandler();
     }
 
@@ -82,7 +85,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = corsProperties.toCorsConfiguration();
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/sso/**", configuration);
         return source;
     }
 
@@ -97,22 +100,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .authorizeRequests()
                     .antMatchers("/error",
-                            "/.well-known/*",
-                            "/oauth/token",
-                            "/register",
-                            "/login",
-                            "/user/check_user_name",
-                            "/user/check_user_email").permitAll()
+                            "/sso/.well-known/*",
+                            "/sso/oauth/token",
+                            "/sso/register",
+                            "/sso/login",
+                            "/sso/user/check_user_name",
+                            "/sso/user/check_user_email").permitAll()
                     .anyRequest().authenticated()
             .and()
                 .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                // .failureHandler(customAuthenticationFailureHandler())
-                // .successHandler(customAuthenticationSuccessHandler())
+                .loginPage("/sso/login")
+                .loginProcessingUrl("/sso/login")
+                // .failureHandler(ssoCustomAuthenticationFailureHandler())
+                // .successHandler(ssoCustomAuthenticationSuccessHandler())
                 .permitAll()
             .and()
-                .logout().logoutSuccessHandler(customLogoutSuccessHandler())
+                .logout().logoutSuccessHandler(ssoCustomLogoutSuccessHandler()).logoutUrl("/sso/logout")
             .and()
                 .csrf().disable()
             .sessionManagement()

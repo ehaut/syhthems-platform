@@ -11,7 +11,8 @@ import top.sunriseydy.syhthems.common.vo.ResultVO;
  * @date 2019-03-12 20:22
  */
 @Controller
-public class HomeController {
+@RequestMapping("/sso")
+public class SsoHomeController {
 
     @RequestMapping(value = "/")
     @ResponseBody
