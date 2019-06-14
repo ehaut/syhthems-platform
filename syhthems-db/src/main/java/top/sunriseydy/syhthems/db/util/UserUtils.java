@@ -51,13 +51,14 @@ public class UserUtils {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         // 将用户的角色添加到权限中
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getRoleCode()));
-        }
+        roles.forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getRoleCode())));
+
         // 将角色所拥有的权限添加到权限中
-        for (Menu menu : menus) {
-            authorities.add(new SimpleGrantedAuthority(menu.getPermission()));
-        }
+        menus.stream().map(Menu::getPermission).distinct().forEach(s -> {
+            if (s != null && !"ROLE_USER".equals(s)) {
+                authorities.add(new SimpleGrantedAuthority(s));
+            }
+        });
         return new CustomUserDetails(
                 user.getUsername(),
                 user.getPassword(),
@@ -151,7 +152,11 @@ public class UserUtils {
             username = authentication.getName();
         }
         try {
-            return ((CustomUserDetails) userDetailsService.loadUserByUsername(username)).erasePassword();
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+            if (userDetails instanceof CustomUserDetails) {
+                return ((CustomUserDetails) userDetails).erasePassword();
+            }
+            return null;
         } catch (IllegalArgumentException e) {
             return null;
         }
