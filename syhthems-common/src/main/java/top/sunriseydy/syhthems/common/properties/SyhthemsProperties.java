@@ -20,4 +20,7 @@ import javax.validation.Valid;
 public class SyhthemsProperties {
     @Valid
     private SecurityProperties security;
+
+    @Valid
+    private InfluxDBProperties influx;
 }
