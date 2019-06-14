@@ -1,11 +1,14 @@
 package top.sunriseydy.syhthems.common.vo;
 
+import lombok.Data;
+
 /**
  * 返回的结果对象
  *
  * @author SunriseYDY
  * @date 2019-03-08 18:25
  */
+@Data
 public class ResultVO<T> {
 
     private Integer code;
@@ -26,38 +29,5 @@ public class ResultVO<T> {
     }
 
     public ResultVO() {
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
-
-    @Override
-    public String toString() {
-        return "ResultVO{" +
-                "code=" + code +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
     }
 }
