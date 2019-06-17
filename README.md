@@ -129,3 +129,9 @@ JavaScript 与 XML 技术）向后台 API 发送请求。
 - 实现多种数据点查看样式
 - 平台文档编写
 - 代码清洗
+
+## LICENSE
+
+MIT License
+
+Copyright (c) 2019 SunriseYDY
