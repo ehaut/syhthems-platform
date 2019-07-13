@@ -26,7 +26,6 @@
     </parent>
 
     <modules>
-        <module>syhthems</module>
         <module>syhthems-common</module>
         <module>syhthems-db</module>
         <module>syhthems-sso</module>
@@ -44,7 +43,6 @@
 
         <!-- syhthems 各模块版本号-->
         <syhthems-parent.version>0.0.1-SNAPSHOT</syhthems-parent.version>
-        <syhthems.version>0.0.1-SNAPSHOT</syhthems.version>
         <syhthems-common.version>0.0.1-SNAPSHOT</syhthems-common.version>
         <syhthems-db.version>0.0.1-SNAPSHOT</syhthems-db.version>
         <syhthems-sso.version>0.0.1-SNAPSHOT</syhthems-sso.version>
