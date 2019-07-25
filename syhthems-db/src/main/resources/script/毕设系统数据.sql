@@ -167,7 +167,7 @@ CREATE TABLE `oauth_client_details` (
 
 LOCK TABLES `oauth_client_details` WRITE;
 /*!40000 ALTER TABLE `oauth_client_details` DISABLE KEYS */;
-INSERT INTO `oauth_client_details` VALUES ('syhthems-web','','$2a$10$3VvM/JowoODhd9J0N1W5uuqhvNtaiWWWZiyGzr6ISkT5i8wjpFQh.','web','authorization_code,refresh_token','http://localhost:8082/web/api/login,http://localhost:8083/login','',NULL,NULL,'{}','web','2019-04-09 11:30:54','2019-05-15 13:01:00',0);
+INSERT INTO `oauth_client_details` VALUES ('syhthems-web','','$2a$10$3VvM/JowoODhd9J0N1W5uuqhvNtaiWWWZiyGzr6ISkT5i8wjpFQh.','web','authorization_code,refresh_token','http://localhost:9090/login','',NULL,NULL,'{}','web','2019-04-09 11:30:54','2019-07-13 21:57:25',0);
 /*!40000 ALTER TABLE `oauth_client_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
