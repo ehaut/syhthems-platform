@@ -39,7 +39,7 @@
         <java.version>11</java.version>
 
         <!-- Spring Boot 版本号-->
-        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
+        <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
 
         <!-- syhthems 各模块版本号-->
         <syhthems-parent.version>0.0.1-SNAPSHOT</syhthems-parent.version>
