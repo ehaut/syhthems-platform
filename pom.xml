@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.4.RELEASE</version>
+        <version>2.1.11.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -39,7 +39,7 @@
         <java.version>11</java.version>
 
         <!-- Spring Boot 版本号-->
-        <spring-boot.version>2.1.4.RELEASE</spring-boot.version>
+        <spring-boot.version>2.1.11.RELEASE</spring-boot.version>
 
         <!-- syhthems 各模块版本号-->
         <syhthems-parent.version>0.0.1-SNAPSHOT</syhthems-parent.version>
@@ -60,7 +60,7 @@
         <mybatis.starter.version>2.1.1</mybatis.starter.version>
         <commons-io.version>2.6</commons-io.version>
         <jedis.version>2.9.3</jedis.version>
-        <spring-session-redis.version>2.1.5.RELEASE</spring-session-redis.version>
+        <spring-session-redis.version>2.1.9.RELEASE</spring-session-redis.version>
         <nimbus-jose-jwt.version>7.1</nimbus-jose-jwt.version>
         <spring-security.version>5.2.1.RELEASE</spring-security.version>
     </properties>
