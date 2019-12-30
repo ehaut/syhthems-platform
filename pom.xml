@@ -31,6 +31,7 @@
         <module>syhthems-sso</module>
         <module>syhthems-web-api</module>
         <module>syhthems-device</module>
+        <module>syhthems-eureka</module>
     </modules>
 
     <properties>
@@ -40,6 +41,8 @@
 
         <!-- Spring Boot 版本号-->
         <spring-boot.version>2.1.11.RELEASE</spring-boot.version>
+        <!-- Spring Cloud 版本号 -->
+        <spring-cloud-dependencies.version>Greenwich.SR4</spring-cloud-dependencies.version>
 
         <!-- syhthems 各模块版本号-->
         <syhthems-parent.version>0.0.1-SNAPSHOT</syhthems-parent.version>
@@ -87,6 +90,14 @@
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-oauth2-jose</artifactId>
                 <version>${spring-security.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
 
