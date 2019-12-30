@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: syhthems-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7000/eureka/
+  instance:
+    instance-id: syhthems-gateway-8080
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, health, info
+
+info:
+  app.name: ${spring.application.name}
+  app.java.version: @java.version@
+  app.java.runtime-version: @java.runtime.version@
+  app.spring-boot.version: @spring-boot.version@
+  app.spring-cloud.version: @spring-cloud-dependencies.version@
+  build.artifactId: @project.artifactId@
+  build.version: @project.version@

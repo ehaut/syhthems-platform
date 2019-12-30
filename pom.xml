@@ -32,6 +32,7 @@
         <module>syhthems-web-api</module>
         <module>syhthems-device</module>
         <module>syhthems-eureka</module>
+        <module>syhthems-gateway</module>
     </modules>
 
     <properties>
