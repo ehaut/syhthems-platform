@@ -4,11 +4,37 @@ spring:
       - common
       - db
       - sso
+  application:
+    name: syhthems-sso
 server:
-  port: 8081
+  port: 7010
 logging:
   level:
     org.springframework.security: debug
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://localhost:7000/eureka/
+  instance:
+    instance-id: syhthems-sso-7010
+    prefer-ip-address: true     #访问路径可以显示IP地址
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, health, info
+
+info:
+  app.name: ${spring.application.name}
+  app.java.version: @java.version@
+  app.java.runtime-version: @java.runtime.version@
+  app.spring-boot.version: @spring-boot.version@
+  app.spring-cloud.version: @spring-cloud-dependencies.version@
+  build.artifactId: @project.artifactId@
+  build.version: @project.version@
+
 syhthems:
   security:
     sso-server: https://sso.syhthems.sunriseydy.top/sso

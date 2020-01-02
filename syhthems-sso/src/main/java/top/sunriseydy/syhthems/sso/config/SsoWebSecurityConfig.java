@@ -85,7 +85,7 @@ public class SsoWebSecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = corsProperties.toCorsConfiguration();
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/sso/**", configuration);
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 
@@ -100,22 +100,23 @@ public class SsoWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .authorizeRequests()
                     .antMatchers("/error",
-                            "/sso/.well-known/*",
-                            "/sso/oauth/token",
-                            "/sso/register",
-                            "/sso/login",
-                            "/sso/user/check_user_name",
-                            "/sso/user/check_user_email").permitAll()
+                            "/actuator/*",
+                            "/.well-known/*",
+                            "/oauth/token",
+                            "/register",
+                            "/login",
+                            "/user/check_user_name",
+                            "/user/check_user_email").permitAll()
                     .anyRequest().authenticated()
             .and()
                 .formLogin()
-                .loginPage("/sso/login")
-                .loginProcessingUrl("/sso/login")
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
                 // .failureHandler(ssoCustomAuthenticationFailureHandler())
                 // .successHandler(ssoCustomAuthenticationSuccessHandler())
                 .permitAll()
             .and()
-                .logout().logoutSuccessHandler(ssoCustomLogoutSuccessHandler()).logoutUrl("/sso/logout")
+                .logout().logoutSuccessHandler(ssoCustomLogoutSuccessHandler()).logoutUrl("/logout")
             .and()
                 .csrf().disable()
             .sessionManagement()

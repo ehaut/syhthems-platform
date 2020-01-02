@@ -27,3 +27,10 @@ info:
   app.spring-cloud.version: @spring-cloud-dependencies.version@
   build.artifactId: @project.artifactId@
   build.version: @project.version@
+
+zuul:
+  routes:
+    prov:
+      path: /sso/**
+      serviceId: syhthems-sso
+  ignored-services: "*"

@@ -15,7 +15,6 @@ import top.sunriseydy.syhthems.db.util.UserUtils;
  * @date 2019-04-12 10:27
  */
 @Controller
-@RequestMapping("/sso")
 public class SsoUserController {
 
     @Autowired
