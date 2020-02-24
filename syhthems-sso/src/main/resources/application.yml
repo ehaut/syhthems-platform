@@ -8,6 +8,8 @@ spring:
     name: syhthems-sso
 server:
   port: 7010
+  servlet:
+    context-path: /sso
 logging:
   level:
     org.springframework.security: debug
