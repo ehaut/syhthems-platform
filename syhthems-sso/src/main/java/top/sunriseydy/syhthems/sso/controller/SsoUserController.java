@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import top.sunriseydy.syhthems.common.util.ResultUtils;
 import top.sunriseydy.syhthems.common.vo.ResultVO;
+import top.sunriseydy.syhthems.db.model.CustomUserDetails;
 import top.sunriseydy.syhthems.db.model.User;
 import top.sunriseydy.syhthems.db.service.UserService;
 import top.sunriseydy.syhthems.db.util.UserUtils;
@@ -44,5 +45,11 @@ public class SsoUserController {
     @ResponseBody
     public String checkUserEmail(@RequestParam(required = true) String email) {
         return userService.existsWithEmail(email) ? "false" : "true";
+    }
+
+    @RequestMapping("/me")
+    @ResponseBody
+    public ResultVO<CustomUserDetails> me() {
+        return ResultUtils.success(UserUtils.getCustomUserDetails());
     }
 }
