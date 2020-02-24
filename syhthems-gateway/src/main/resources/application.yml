@@ -33,4 +33,12 @@ zuul:
     prov:
       path: /sso/**
       serviceId: syhthems-sso
+      sensitiveHeaders: none
+      stripPrefix: false
   ignored-services: "*"
+  sensitiveHeaders: Cookie,Set-Cookie
+  add-host-header: true
+
+logging:
+  level:
+    top.sunriseydy.syhthems: debug
