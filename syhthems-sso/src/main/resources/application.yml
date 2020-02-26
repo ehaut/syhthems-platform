@@ -17,7 +17,7 @@ logging:
 eureka:
   client: #客户端注册进eureka服务列表内
     service-url:
-      defaultZone: http://localhost:7000/eureka/
+      defaultZone: http://eureka.syhthems.local:7000/eureka/
   instance:
     instance-id: syhthems-sso-7010
     prefer-ip-address: true     #访问路径可以显示IP地址
@@ -38,8 +38,6 @@ info:
   build.version: @project.version@
 
 syhthems:
-  security:
-    sso-server: https://sso.syhthems.sunriseydy.top/sso
   cors:
     allowed-origins: '*' # 设置允许的源
     allowed-methods: GET, PUT, POST, DELETE # 设置允许的请求方法
