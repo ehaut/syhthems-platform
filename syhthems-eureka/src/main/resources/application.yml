@@ -4,7 +4,7 @@ server:
 eureka:
   instance:
     prefer-ip-address: true
-    hostname: eureka.syhthems.local
+    hostname: ${SYHTHEMS_EUREKA_HOSTNAME:eureka.syhthems.local}
   client:
     registerWithEureka: false
     fetchRegistry: false

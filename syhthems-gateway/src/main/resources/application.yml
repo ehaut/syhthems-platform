@@ -8,7 +8,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka.syhthems.local:7000/eureka/
+      defaultZone: ${SYHTHEMS_EUREKA_DEFAULT_ZONE:http://eureka.syhthems.local:7000/eureka/}
   instance:
     instance-id: syhthems-gateway-8080
     prefer-ip-address: true

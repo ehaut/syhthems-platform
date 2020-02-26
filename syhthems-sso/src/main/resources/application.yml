@@ -17,7 +17,7 @@ logging:
 eureka:
   client: #客户端注册进eureka服务列表内
     service-url:
-      defaultZone: http://eureka.syhthems.local:7000/eureka/
+      defaultZone: ${SYHTHEMS_EUREKA_DEFAULT_ZONE:http://eureka.syhthems.local:7000/eureka/}
   instance:
     instance-id: syhthems-sso-7010
     prefer-ip-address: true     #访问路径可以显示IP地址
