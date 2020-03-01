@@ -4,11 +4,3 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: ${syhthems.security.sso-server}/.well-known/jwks.json
-syhthems:
-  cors:
-    allowed-origins: '*' # 设置允许的源
-    allowed-methods: GET, PUT, POST, DELETE, PATCH # 设置允许的请求方法
-    allowed-headers: '*' # 设置允许的头
-  oauth2:
-    client-id: 'syhthems-web'
-    client-secret: 'sunriseydy-syhthems-web-secret'
