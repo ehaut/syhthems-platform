@@ -315,11 +315,11 @@ export default class SyhthemsOAuth2 {
           }
           let requestConfig = {
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
-            baseURL: this.options.resourceServer
-            /* auth: {
+            baseURL: this.options.authorizationServer,
+            auth: {
               username: this.options.clientId,
               password: this.options.clientSecret
-            } */
+            }
           }
           this.$_http.post('/oauth/token', qs.stringify(data), requestConfig)
               .then((response) => {
@@ -370,11 +370,11 @@ export default class SyhthemsOAuth2 {
         }
         let requestConfig = {
           headers: { 'content-type': 'application/x-www-form-urlencoded' },
-          baseURL: this.options.resourceServer
-          /* auth: {
+          baseURL: this.options.authorizationServer,
+          auth: {
             username: this.options.clientId,
             password: this.options.clientSecret
-          } */
+          }
         }
         this.$_http.post('/oauth/token', qs.stringify(data), requestConfig)
             .then((response) => {
