@@ -4,6 +4,8 @@ syhthems 是一个开源的物联网平台项目，它可以实现物联网产�
 
 **文档：**[http://syhthems.ehaut.cn/](http://syhthems.ehaut.cn/)
 
+**微服务架构改造** 目前正在进行 syhthems 微服务架构改造，详细进度可查看 project：[syhthems Platform 2.0](https://github.com/ehaut/syhthems-platform/projects/1) 
+
 ## 平台架构
 
 syhthems IoT Platform 采用分模块开发，首先分为前端和后端两个大部分，前端比较简单，就只有一个 `syhthems-web` 模块，后端是主要的部分，分为 `syhthems-common` 平台基础模块，`syhthems-db` 数据访问模块，`syhthems-sso` 单点登录模块，`syhthems-web-api` Web 后台 API 模块，`syhthems-device`终端设备接入模块。
