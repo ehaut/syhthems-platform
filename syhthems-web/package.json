@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.1",
-    "core-js": "^2.6.11",
+    "core-js": "^3.6.4",
     "echarts": "^4.5.0",
     "lodash": "^4.17.15",
     "qs": "^6.9.1",
@@ -25,9 +25,9 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.12.1",
-    "@vue/cli-plugin-babel": "^3.12.1",
-    "@vue/cli-plugin-eslint": "^3.12.1",
-    "@vue/cli-service": "^3.12.1",
+    "@vue/cli-plugin-babel": "~4.2.3",
+    "@vue/cli-plugin-eslint": "~4.2.3",
+    "@vue/cli-service": "~4.2.3",
     "async-await": "^0.1.40",
     "babel-eslint": "^10.1.0",
     "css-loader": "^2.1.1",
