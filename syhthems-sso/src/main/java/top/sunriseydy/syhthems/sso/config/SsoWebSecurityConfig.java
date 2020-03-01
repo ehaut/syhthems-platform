@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,9 +19,12 @@ import org.springframework.security.web.authentication.logout.LogoutSuccessHandl
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import top.sunriseydy.syhthems.common.constants.BaseConstants;
 import top.sunriseydy.syhthems.common.properties.CorsProperties;
-import top.sunriseydy.syhthems.sso.handler.*;
+import top.sunriseydy.syhthems.sso.handler.CustomAccessDeniedHandler;
+import top.sunriseydy.syhthems.sso.handler.CustomAuthenticationEntryPoint;
+import top.sunriseydy.syhthems.sso.handler.CustomAuthenticationFailureHandler;
+import top.sunriseydy.syhthems.sso.handler.CustomAuthenticationSuccessHandler;
+import top.sunriseydy.syhthems.sso.handler.CustomLogoutSuccessHandler;
 
 /**
  * WebSecurity配置类
@@ -32,7 +34,6 @@ import top.sunriseydy.syhthems.sso.handler.*;
  */
 @Configuration
 @EnableWebSecurity
-@Order(BaseConstants.DEFAULT_ORDER + 1)
 public class SsoWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -46,22 +47,22 @@ public class SsoWebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/static/**", "/favicon.ico");
     }
 
-    @Bean
+    // @Bean
     public CustomAuthenticationEntryPoint ssoCustomAuthenticationEntryPoint() {
         return new CustomAuthenticationEntryPoint();
     }
 
-    @Bean
+    // @Bean
     public CustomAccessDeniedHandler ssoCustomAccessDeniedHandler() {
         return new CustomAccessDeniedHandler();
     }
 
-    @Bean
+    // @Bean
     public AuthenticationSuccessHandler ssoCustomAuthenticationSuccessHandler() {
         return new CustomAuthenticationSuccessHandler();
     }
 
-    @Bean
+    // @Bean
     public AuthenticationFailureHandler ssoCustomAuthenticationFailureHandler() {
         return new CustomAuthenticationFailureHandler();
     }
@@ -81,7 +82,6 @@ public class SsoWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService userDetailsService;
 
-    @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = corsProperties.toCorsConfiguration();
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -92,9 +92,7 @@ public class SsoWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .cors().configurationSource(corsConfigurationSource())
-            .and()
-                .headers()
+            .headers()
                 .httpStrictTransportSecurity().disable()
                 .defaultsDisabled().cacheControl().and()
             .and()
@@ -102,7 +100,6 @@ public class SsoWebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/error",
                             "/actuator/*",
                             "/.well-known/*",
-                            "/oauth/token",
                             "/register",
                             "/login",
                             "/user/check_user_name",

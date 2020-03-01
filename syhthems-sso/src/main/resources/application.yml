@@ -36,9 +36,3 @@ info:
   app.spring-cloud.version: @spring-cloud-dependencies.version@
   build.artifactId: @project.artifactId@
   build.version: @project.version@
-
-syhthems:
-  cors:
-    allowed-origins: '*' # 设置允许的源
-    allowed-methods: GET, PUT, POST, DELETE # 设置允许的请求方法
-    allowed-headers: '*' # 设置允许的头
