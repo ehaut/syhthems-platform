@@ -14,6 +14,16 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <!-- spring cloud -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
         <!-- syhthems 相关依赖-->
         <dependency>
             <groupId>top.sunriseydy</groupId>

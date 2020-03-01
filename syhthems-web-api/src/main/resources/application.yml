@@ -1,5 +1,5 @@
 server:
-  port: 8082
+  port: 7020
 
 spring:
   profiles:
@@ -7,11 +7,36 @@ spring:
       - common
       - db
       - web
+  application:
+    name: syhthems-api
 
 syhthems:
   security:
-    sso-server: http://localhost:8081/sso
+    sso-server: ${SYHTHEMS_SSO_SERVER:http://gateway.syhthems.local:8080/sso}
 
 logging:
   level:
     org.springframework.security: debug
+
+eureka:
+  client: #客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: ${SYHTHEMS_EUREKA_DEFAULT_ZONE:http://eureka.syhthems.local:7000/eureka/}
+  instance:
+    instance-id: syhthems-api-7020
+    prefer-ip-address: true     #访问路径可以显示IP地址
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, health, info
+
+info:
+  app.name: ${spring.application.name}
+  app.java.version: @java.version@
+  app.java.runtime-version: @java.runtime.version@
+  app.spring-boot.version: @spring-boot.version@
+  app.spring-cloud.version: @spring-cloud-dependencies.version@
+  build.artifactId: @project.artifactId@
+  build.version: @project.version@

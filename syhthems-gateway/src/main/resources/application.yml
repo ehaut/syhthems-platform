@@ -30,11 +30,14 @@ info:
 
 zuul:
   routes:
-    prov:
+    sso:
       path: /sso/**
       serviceId: syhthems-sso
       sensitiveHeaders: none
       stripPrefix: false
+    api:
+      path: /api/**
+      serviceId: syhthems-api
   ignored-services: "*"
   sensitiveHeaders: Cookie,Set-Cookie
   add-host-header: true
