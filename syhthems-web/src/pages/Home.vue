@@ -28,7 +28,7 @@
           row
           wrap
         >
-          <template v-slot:header="">
+          <template v-slot:header="{}">
             <v-toolbar
               class="mb-2"
             >
@@ -41,7 +41,6 @@
               >
                 <template v-slot:activator="{ on }">
                   <v-btn
-                    icon
                     fab
                     dark
                     color="pink"
