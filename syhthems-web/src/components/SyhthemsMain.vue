@@ -90,7 +90,7 @@
           return this.$store.state.darkTheme
         },
         set (value) {
-          this.$store.commit('setDarkTheme', value)
+          this.$store.commit('setDarkTheme', { darkTheme: value, theme: this.$vuetify.theme })
         },
       },
 

@@ -58,7 +58,7 @@
     created () {
       console.log('APP created...')
       if (window.localStorage.getItem('darkTheme')) {
-        this.$store.commit('setDarkTheme', (window.localStorage.getItem('darkTheme') === true.toString()))
+        this.$store.commit('setDarkTheme', { darkTheme: (window.localStorage.getItem('darkTheme') === true.toString()), theme: this.$vuetify.theme })
       }
       // 注册全局导航守卫
       this.$router.beforeEach((to, from, next) => {
