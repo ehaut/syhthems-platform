@@ -1,13 +1,10 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex sm12>
+<template>
+  <v-row>
+    <v-col sm="12">
       <v-card>
         <v-toolbar class="mb-2">
           <v-btn
-            flat
+            text
             :to="toHome"
           >
             <v-icon>$vuetify.icons.prev</v-icon>
@@ -24,41 +21,40 @@
           </v-btn>
         </v-toolbar>
         <v-container
-          fill-height
+          class="fill-height"
           fluid
         >
-          <v-layout
-            row
-            wrap
-            justify-space-between
+          <v-row
+
+            justify="space-between"
           >
-            <v-flex sm5>
-              <v-card class="my-5">
+            <v-col sm="5">
+              <v-card class="my-12">
                 <v-card-text class="primary white--text">
-                  <h5 class="text-xs-center headline">
+                  <h5 class="text-center headline">
                     产品名称
                   </h5>
                 </v-card-text>
                 <v-divider />
                 <v-card-text>{{ productVO ? productVO.product.name : '' }}</v-card-text>
               </v-card>
-            </v-flex>
-            <v-flex sm5>
-              <v-card class="my-5">
+            </v-col>
+            <v-col sm="5">
+              <v-card class="my-12">
                 <v-card-text class="primary white--text">
-                  <h5 class="text-xs-center headline">
+                  <h5 class="text-center headline">
                     产品简介
                   </h5>
                 </v-card-text>
                 <v-divider />
                 <v-card-text>{{ productVO ? productVO.product.description : '' }}</v-card-text>
               </v-card>
-            </v-flex>
-            <v-flex sm5>
+            </v-col>
+            <v-col sm="5">
               <v-card>
-                <v-card-text class="text-xs-center primary white--text title">
+                <v-card-text class="text-center primary white--text title">
                   <v-card
-                    class="title text-xs-center white--text"
+                    class="title text-center white--text"
                     :to="toDataStream"
                     color="primary"
                     flat
@@ -70,57 +66,55 @@
                 <v-divider />
                 <v-container
                   fluid
-                  grid-list-md
                 >
                   <v-data-iterator
                     :items="productVO ? productVO.dataStreams : []"
-                    content-tag="v-layout"
-                    hide-actions
+                    hide-default-footer
                     no-data-text="该产品没有数据流"
                     row
                     wrap
                   >
                     <template v-slot:item="props">
-                      <v-flex
-                        xs12
+                      <v-col
+                        cols="12"
                       >
                         <v-card>
                           <v-list dense>
-                            <v-list-tile>
-                              <v-list-tile-content class="title">
+                            <v-list-item>
+                              <v-list-item-content class="title">
                                 数据流编码：
-                              </v-list-tile-content>
-                              <v-list-tile-content class="align-end title">
+                              </v-list-item-content>
+                              <v-list-item-content class="align-end title">
                                 {{ props.item.dataStreamCode }}
-                              </v-list-tile-content>
-                            </v-list-tile>
+                              </v-list-item-content>
+                            </v-list-item>
                             <v-divider />
-                            <v-list-tile>
-                              <v-list-tile-content>数据流单位： </v-list-tile-content>
-                              <v-list-tile-content class="align-end">
+                            <v-list-item>
+                              <v-list-item-content>数据流单位： </v-list-item-content>
+                              <v-list-item-content class="align-end">
                                 {{ props.item.unit }}
-                              </v-list-tile-content>
-                            </v-list-tile>
+                              </v-list-item-content>
+                            </v-list-item>
                             <v-divider />
-                            <v-list-tile>
-                              <v-list-tile-content>数据流单位符号：</v-list-tile-content>
-                              <v-list-tile-content class="align-end">
+                            <v-list-item>
+                              <v-list-item-content>数据流单位符号：</v-list-item-content>
+                              <v-list-item-content class="align-end">
                                 {{ props.item.unitSymbol }}
-                              </v-list-tile-content>
-                            </v-list-tile>
+                              </v-list-item-content>
+                            </v-list-item>
                           </v-list>
                         </v-card>
-                      </v-flex>
+                      </v-col>
                     </template>
                   </v-data-iterator>
                 </v-container>
               </v-card>
-            </v-flex>
-            <v-flex sm5>
+            </v-col>
+            <v-col sm="5">
               <v-card>
-                <v-card-text class="text-xs-center primary white--text title">
+                <v-card-text class="text-center primary white--text title">
                   <v-card
-                    class="title text-xs-center white--text"
+                    class="title text-center white--text"
                     :to="toDevice"
                     color="primary"
                     flat
@@ -132,57 +126,55 @@
                 <v-divider />
                 <v-container
                   fluid
-                  grid-list-md
                 >
                   <v-data-iterator
                     :items="productVO ? productVO.devices : []"
-                    content-tag="v-layout"
-                    hide-actions
+                    hide-default-footer
                     no-data-text="该产品没有设备"
                     row
                     wrap
                   >
                     <template v-slot:item="props">
-                      <v-flex
-                        xs12
+                      <v-col
+                        cols="12"
                       >
                         <v-card>
                           <v-list dense>
-                            <v-list-tile>
-                              <v-list-tile-content class="title">
+                            <v-list-item>
+                              <v-list-item-content class="title">
                                 设备ID：
-                              </v-list-tile-content>
-                              <v-list-tile-content class="align-end">
+                              </v-list-item-content>
+                              <v-list-item-content class="align-end">
                                 {{ props.item.deviceId }}
-                              </v-list-tile-content>
-                            </v-list-tile>
+                              </v-list-item-content>
+                            </v-list-item>
                             <v-divider />
-                            <v-list-tile>
-                              <v-list-tile-content>设备编号：</v-list-tile-content>
-                              <v-list-tile-content class="align-end">
+                            <v-list-item>
+                              <v-list-item-content>设备编号：</v-list-item-content>
+                              <v-list-item-content class="align-end">
                                 {{ props.item.code }}
-                              </v-list-tile-content>
-                            </v-list-tile>
+                              </v-list-item-content>
+                            </v-list-item>
                             <v-divider />
-                            <v-list-tile>
-                              <v-list-tile-content>设备名称：</v-list-tile-content>
-                              <v-list-tile-content class="align-end">
+                            <v-list-item>
+                              <v-list-item-content>设备名称：</v-list-item-content>
+                              <v-list-item-content class="align-end">
                                 {{ props.item.name }}
-                              </v-list-tile-content>
-                            </v-list-tile>
+                              </v-list-item-content>
+                            </v-list-item>
                           </v-list>
                         </v-card>
-                      </v-flex>
+                      </v-col>
                     </template>
                   </v-data-iterator>
                 </v-container>
               </v-card>
-            </v-flex>
-          </v-layout>
+            </v-col>
+          </v-row>
         </v-container>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -193,7 +185,7 @@
     data: () => ({
       toHome: { path: '/' },
       toDataStream: { path: '/data_stream/' },
-      toDevice: { path: '/device/list/' }
+      toDevice: { path: '/device/list/' },
     }),
     computed: {
       productVO: {
@@ -203,8 +195,8 @@
         },
         set (value) {
           this.$store.commit('setProductVO', value)
-        }
-      }
+        },
+      },
     },
     watch: {
       '$route' (to, from) {
@@ -212,7 +204,7 @@
         if (!_.isEmpty(to.params) && to.params.productId) {
           this.getProductVO()
         }
-      }
+      },
     },
     created () {
       this.getProductVO()
@@ -231,7 +223,7 @@
         } else {
           this.$dialog.notify.error(('您还没有选择产品！即将为您跳转到首页'), {
             position: 'bottom-right',
-            timeout: 3000
+            timeout: 3000,
           })
           this.$router.push({ path: '/' })
         }
@@ -241,15 +233,15 @@
         if (!productId) {
           productId = this.$route.params.productId
         }
-        let newRawMenus = this.$store.state.menu.rawMenus.map((value, index, array) => {
+        const newRawMenus = this.$store.state.menu.rawMenus.map((value, index, array) => {
           return {
             ...value,
-            path: value.path.replace(':productId', productId)
+            path: value.path.replace(':productId', productId),
           }
         })
         this.$store.commit('menu/setRawMenus', newRawMenus)
-      }
-    }
+      },
+    },
   }
 </script>
 

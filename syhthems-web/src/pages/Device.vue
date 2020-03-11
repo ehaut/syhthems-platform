@@ -1,13 +1,10 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex sm12>
+<template>
+  <v-row>
+    <v-col sm="12">
       <v-card>
         <v-toolbar class="mb-2">
           <v-btn
-            flat
+            text
             :to="toDeviceList"
           >
             <v-icon>$vuetify.icons.prev</v-icon>
@@ -24,104 +21,100 @@
           </v-btn>
         </v-toolbar>
         <v-divider />
-        <v-layout
-          row
-          wrap
+        <v-row
+
           class="ma-2"
         >
-          <v-flex
-            xs12
-            md4
+          <v-col
+            cols="12"
+            md="4"
           >
             <v-card>
               <v-list dense>
-                <v-list-tile>
-                  <v-list-tile-content class="title">
+                <v-list-item>
+                  <v-list-item-content class="title">
                     设备ID：
-                  </v-list-tile-content>
-                  <v-list-tile-content class="align-end">
+                  </v-list-item-content>
+                  <v-list-item-content class="align-end">
                     {{ deviceId ? deviceId : 0 }}
-                  </v-list-tile-content>
-                </v-list-tile>
+                  </v-list-item-content>
+                </v-list-item>
                 <v-divider />
-                <v-list-tile>
-                  <v-list-tile-content>设备密钥： </v-list-tile-content>
-                  <v-list-tile-content class="align-end">
+                <v-list-item>
+                  <v-list-item-content>设备密钥： </v-list-item-content>
+                  <v-list-item-content class="align-end">
                     {{ deviceVO ? deviceVO.device.deviceSecret : '' }}
-                  </v-list-tile-content>
-                </v-list-tile>
+                  </v-list-item-content>
+                </v-list-item>
               </v-list>
             </v-card>
-          </v-flex>
-          <v-flex
-            xs12
-            md4
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
           >
             <v-card>
               <v-list dense>
-                <v-list-tile>
-                  <v-list-tile-content>设备编号：</v-list-tile-content>
-                  <v-list-tile-content class="align-end">
+                <v-list-item>
+                  <v-list-item-content>设备编号：</v-list-item-content>
+                  <v-list-item-content class="align-end">
                     {{ deviceVO ? deviceVO.device.code : '' }}
-                  </v-list-tile-content>
-                </v-list-tile>
+                  </v-list-item-content>
+                </v-list-item>
                 <v-divider />
-                <v-list-tile>
-                  <v-list-tile-content>设备名称：</v-list-tile-content>
-                  <v-list-tile-content class="align-end">
+                <v-list-item>
+                  <v-list-item-content>设备名称：</v-list-item-content>
+                  <v-list-item-content class="align-end">
                     {{ deviceVO ? deviceVO.device.name : '' }}
-                  </v-list-tile-content>
-                </v-list-tile>
+                  </v-list-item-content>
+                </v-list-item>
               </v-list>
             </v-card>
-          </v-flex>
-          <v-flex
-            xs12
-            md4
+          </v-col>
+          <v-col
+            cols="12"
+            md="4"
           >
             <v-card>
               <v-list dense>
-                <v-list-tile>
-                  <v-list-tile-content> 设备简介：</v-list-tile-content>
-                  <v-list-tile-content class="align-end">
+                <v-list-item>
+                  <v-list-item-content> 设备简介：</v-list-item-content>
+                  <v-list-item-content class="align-end">
                     {{ deviceVO ? deviceVO.device.description : '' }}
-                  </v-list-tile-content>
-                </v-list-tile>
+                  </v-list-item-content>
+                </v-list-item>
                 <v-divider />
-                <v-list-tile>
-                  <v-list-tile-content> 设备标签：</v-list-tile-content>
-                  <v-list-tile-content class="align-end">
+                <v-list-item>
+                  <v-list-item-content> 设备标签：</v-list-item-content>
+                  <v-list-item-content class="align-end">
                     {{ deviceVO ? deviceVO.device.tags: '' }}
-                  </v-list-tile-content>
-                </v-list-tile>
+                  </v-list-item-content>
+                </v-list-item>
               </v-list>
             </v-card>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
         <v-divider />
-        <v-layout
-          row
-          wrap
-        >
-          <v-flex
-            xs12
+        <v-row>
+          <v-col
+            cols="12"
           >
+            <!-- todo -->
             <v-data-iterator
               :items="deviceVO ? deviceVO.dataStreamVOs : []"
               item-key="dataStream.dataStreamCode"
-              content-tag="v-layout"
+              todo
               :pagination.sync="pagination"
-              :rows-per-page-items="rowsPerPageItems"
-              :total-items="total"
-              :hide-actions="!isExpanded"
+              :items-per-page-options="rowsPerPageItems"
+              :server-items-length="total"
+              :hide-default-footer="!isExpanded"
               no-data-text="该设备没有绑定数据流"
-              :expand="expand"
               row
               wrap
             >
               <template v-slot:item="props">
-                <v-flex
-                  xs12
+                <v-col
+                  cols="12"
                   class="ma-2"
                 >
                   <v-card>
@@ -133,7 +126,7 @@
                       <v-btn
                         v-if="props.expanded"
                         fab
-                        flat
+                        text
                         @click="expandCharts(props)"
                       >
                         <v-icon>$vuetify.icons.up</v-icon>
@@ -141,7 +134,7 @@
                       <v-btn
                         v-else
                         fab
-                        flat
+                        text
                         @click="expandCharts(props)"
                       >
                         <v-icon>$vuetify.icons.down</v-icon>
@@ -153,14 +146,11 @@
                     >
                       <v-card>
                         <v-toolbar class="pt-2">
-                          <v-layout
-                            row
-                            wrap
-                          >
-                            <v-flex
-                              xs12
-                              sm6
-                              md3
+                          <v-row>
+                            <v-col
+                              cols="12"
+                              sm="6"
+                              md="3"
                             >
                               <v-menu
                                 v-model="startDateMenu"
@@ -189,11 +179,11 @@
                                   @input="startDateMenu = false"
                                 />
                               </v-menu>
-                            </v-flex>
-                            <v-flex
-                              xs12
-                              sm6
-                              md3
+                            </v-col>
+                            <v-col
+                              cols="12"
+                              sm="6"
+                              md="3"
                             >
                               <v-menu
                                 ref="startTimeMenu"
@@ -225,11 +215,11 @@
                                   @click:minute="$refs.startTimeMenu.save(startTime)"
                                 />
                               </v-menu>
-                            </v-flex>
-                            <v-flex
-                              xs12
-                              sm6
-                              md3
+                            </v-col>
+                            <v-col
+                              cols="12"
+                              sm="6"
+                              md="3"
                             >
                               <v-menu
                                 v-model="endDateMenu"
@@ -258,11 +248,11 @@
                                   @input="endDateMenu = false"
                                 />
                               </v-menu>
-                            </v-flex>
-                            <v-flex
-                              xs12
-                              sm6
-                              md3
+                            </v-col>
+                            <v-col
+                              cols="12"
+                              sm="6"
+                              md="3"
                             >
                               <v-menu
                                 ref="endTimeMenu"
@@ -294,8 +284,8 @@
                                   @click:minute="$refs.endTimeMenu.save(endTime)"
                                 />
                               </v-menu>
-                            </v-flex>
-                          </v-layout>
+                            </v-col>
+                          </v-row>
                           <v-btn
                             color="primary"
                             @click="selectDataPoints(props.item)"
@@ -312,14 +302,14 @@
                       </v-card>
                     </v-card-text>
                   </v-card>
-                </v-flex>
+                </v-col>
               </template>
             </v-data-iterator>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -338,12 +328,12 @@
         startDateTime: '',
         endDateTime: '',
         rowsPerPage: 50,
-        page: 1
+        page: 1,
       },
       total: 30,
       pagination: {
         page: 1,
-        rowsPerPage: 50
+        rowsPerPage: 50,
       },
       isExpanded: false,
       startDateMenu: false,
@@ -357,13 +347,13 @@
       chartData: {
         columns: ['dataPointTimestamp', 'dataStreamCode'],
         rows: [
-          { 'dataPointTimestamp': '2018-01-01', 'dataStreamCode': '' }
-        ]
+          { dataPointTimestamp: '2018-01-01', dataStreamCode: '' },
+        ],
       },
       chartSettings: {
-        xAxisType: 'time'
+        xAxisType: 'time',
       },
-      height: '400px'
+      height: '400px',
     }),
     computed: {
       deviceId: {
@@ -372,34 +362,34 @@
         },
         set (value) {
           this.$store.commit('setDeviceId', value)
-        }
+        },
       },
       productId () {
         return this.$store.getters.productId
       },
       toProduct () {
         return { path: `/product/${this.productId}` }
-      }
+      },
     },
     watch: {
       pagination: {
         handler (newValue, oldValue) {
           this.selectDataPoints()
         },
-        deep: true
-      }
+        deep: true,
+      },
     },
     created () {
       if (!this.$store.getters.productId) {
         this.$dialog.notify.error(('您还没有选择产品！即将为您跳转到首页'), {
           position: 'bottom-right',
-          timeout: 3000
+          timeout: 3000,
         })
         this.$router.push({ path: '/' })
       } else if (!this.$store.state.deviceId) {
         this.$dialog.notify.error(('您还没有选择设备！即将为您跳转到设备列表页面'), {
           position: 'bottom-right',
-          timeout: 3000
+          timeout: 3000,
         })
         this.$router.push({ path: '/device/list/' })
       } else {
@@ -416,7 +406,7 @@
               if (this.deviceVO.dataStreamVOs === null || this.deviceVO.dataStreamVOs.length === 0) {
                 this.$dialog.notify.error(('当前设备没有绑定数据流，请先绑定数据流'), {
                   position: 'bottom-right',
-                  timeout: 3000
+                  timeout: 3000,
                 })
                 this.$router.push({ name: 'DATA_STREAMS' })
               }
@@ -431,10 +421,10 @@
         this.isExpanded = props.expanded
         if (this.isExpanded) {
           this.total = props.item.totalDataPoint
-          let code = props.item.dataStream.dataStreamCode
-          this.chartData.columns = [ '时间', code ]
+          const code = props.item.dataStream.dataStreamCode
+          this.chartData.columns = ['时间', code]
           this.chartData.rows = props.item.dataPoints.map(value => {
-            let ob = {}
+            const ob = {}
             ob['时间'] = new Date(value.dataPointTimestamp)
             ob[code] = value.dataPointData
             return ob
@@ -446,7 +436,7 @@
         }
       },
       contactDataAndTime (date, time) {
-        let v = new Date(date.substr(0, 4), date.substr(5, 2) - 1, date.substr(8, 2), time.substr(0, 2), time.substr(3, 2))
+        const v = new Date(date.substr(0, 4), date.substr(5, 2) - 1, date.substr(8, 2), time.substr(0, 2), time.substr(3, 2))
         // return Math.round(v / 1000)
         return v.getTime()
       },
@@ -456,16 +446,16 @@
         }
         this.dataPointQueryVO.page = this.pagination.page
         this.dataPointQueryVO.rowsPerPage = this.pagination.rowsPerPage
-        let url = '/data_point'
+        const url = '/data_point'
         /* url += qs.stringify(this.dataPointQueryVO, {
           addQueryPrefix: true
         }) */
-        let data = JSON.stringify(this.dataPointQueryVO)
+        const data = JSON.stringify(this.dataPointQueryVO)
         this.$store.commit('setGlobalLoading', true)
         this.$http.post(url, data, {
           headers: {
-            'Content-Type': 'application/json;charset=UTF-8'
-          }
+            'Content-Type': 'application/json;charset=UTF-8',
+          },
         }).then(res => {
           if (res.data.code === 0) {
             if (res.data.data !== null && !_.isEmpty(res.data.data)) {
@@ -479,16 +469,16 @@
         }).catch().finally(() => setTimeout(() => this.$store.commit('setGlobalLoading', false), 500))
       },
       updateCharts (dataStreamVO) {
-        let code = dataStreamVO.dataStream.dataStreamCode
-        this.chartData.columns = [ '时间', code ]
+        const code = dataStreamVO.dataStream.dataStreamCode
+        this.chartData.columns = ['时间', code]
         this.chartData.rows = dataStreamVO.dataPoints.map(value => {
-          let ob = {}
+          const ob = {}
           ob['时间'] = new Date(value.dataPointTimestamp)
           ob[code] = value.dataPointData
           return ob
         })
-      }
-    }
+      },
+    },
   }
 </script>
 

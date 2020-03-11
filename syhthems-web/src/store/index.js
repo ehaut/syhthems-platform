@@ -15,15 +15,15 @@ export default new Vuex.Store({
     mini: false,
     productVO: null,
     devices: [],
-    deviceId: false
+    deviceId: false,
   },
   modules: {
-    menu
+    menu,
   },
   getters: {
     productId: state => {
       return state.productVO ? state.productVO.product.productId : false
-    }
+    },
   },
   mutations: {
     setDarkTheme (state, darkTheme) {
@@ -57,9 +57,9 @@ export default new Vuex.Store({
 
     setGlobalLoading (state, globalLoading) {
       state.globalLoading = globalLoading
-    }
+    },
   },
   actions: {
 
-  }
+  },
 })

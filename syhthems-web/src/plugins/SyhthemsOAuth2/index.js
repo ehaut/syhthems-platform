@@ -11,5 +11,5 @@ export default {
       options.axios = Vue.axios
     }
     Vue.prototype.$oauth2 = new SyhthemsOAuth2(options)
-  }
+  },
 }

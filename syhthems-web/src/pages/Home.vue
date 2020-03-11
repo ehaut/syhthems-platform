@@ -1,15 +1,11 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex
-      md12
+<template>
+  <v-row>
+    <v-col
+      md="12"
     >
-      <v-layout
-        align-start
-        justify-center
-        row
+      <v-row
+        align="start"
+        justify="center"
       >
         <div>
           <h3
@@ -18,19 +14,17 @@
             欢迎访问 syhthems 物联网平台
           </h3>
         </div>
-      </v-layout>
-    </v-flex>
-    <v-flex
-      md-12
+      </v-row>
+    </v-col>
+    <v-col
+      class="md-12"
     >
       <v-container
         fluid
-        grid-list-md
       >
         <v-data-iterator
           :items="productVOs"
-          content-tag="v-layout"
-          hide-actions
+          hide-default-footer
           row
           wrap
         >
@@ -67,11 +61,11 @@
                       lazy-validation
                     >
                       <v-container>
-                        <v-layout wrap>
-                          <v-flex
-                            xs12
-                            sm6
-                            md4
+                        <v-row>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="4"
                           >
                             <v-text-field
                               v-model="addProductForm.model.name"
@@ -79,11 +73,11 @@
                               :rules="addProductForm.fields.name.rules"
                               required
                             />
-                          </v-flex>
-                          <v-flex
-                            xs12
-                            sm6
-                            md8
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                            md="8"
                           >
                             <v-text-field
                               v-model="addProductForm.model.description"
@@ -91,8 +85,8 @@
                               :rules="addProductForm.fields.description.rules"
                               counter="100"
                             />
-                          </v-flex>
-                        </v-layout>
+                          </v-col>
+                        </v-row>
                       </v-container>
                     </v-form>
                   </v-card-text>
@@ -115,29 +109,29 @@
               </v-dialog>
             </v-toolbar>
           </template>
-          <template v-slot:no-data="">
-            <v-flex
-              xs12
-              sm6
-              md4
-              offset-xs0
-              offset-sm3
-              offset-md4
+          <template v-slot:no-data="{ on }">
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
+              offset="0"
+              offset-sm="3"
+              offset-md="4"
+              v-on="on"
             >
               <v-alert
-                :value="true"
                 type="error"
               >
                 该账户下没有产品，新建？
               </v-alert>
-            </v-flex>
+            </v-col>
           </template>
 
           <template v-slot:item="props">
-            <v-flex
-              xs12
-              sm6
-              md4
+            <v-col
+              cols="12"
+              sm="6"
+              md="4"
             >
               <v-card>
                 <v-hover>
@@ -145,7 +139,7 @@
                     <v-expand-transition>
                       <v-card
                         v-if="hover"
-                        class="d-flex transition-fast-in-fast-out blue darken-3 v-card--reveal text-xs-center headline white--text"
+                        class="d-flex transition-fast-in-fast-out blue darken-3 v-card--reveal text-center headline white--text"
                         style="height: 100%;"
                         hover
                         raised
@@ -158,18 +152,17 @@
                       </v-card>
                     </v-expand-transition>
                     <v-container
-                      fill-height
+                      class="fill-height"
                       fluid
                     >
-                      <v-layout fill-height>
-                        <v-flex
-                          xs12
-                          align-end
-                          flexbox
+                      <v-row class="fill-height">
+                        <v-col
+                          class="align-end flexbox"
+                          cols="12"
                         >
                           <h4>{{ props.item.product.name }}</h4>
-                        </v-flex>
-                      </v-layout>
+                        </v-col>
+                      </v-row>
                     </v-container>
                   </v-img>
                 </v-hover>
@@ -180,18 +173,18 @@
                 </v-card-text>
                 <v-divider />
                 <v-list dense>
-                  <v-list-tile>
-                    <v-list-tile-content>设备:</v-list-tile-content>
-                    <v-list-tile-content class="align-end">
+                  <v-list-item>
+                    <v-list-item-content>设备:</v-list-item-content>
+                    <v-list-item-content class="align-end">
                       {{ isEmpty(props.item.devices) ? 0 : props.item.devices.length }} 个
-                    </v-list-tile-content>
-                  </v-list-tile>
-                  <v-list-tile>
-                    <v-list-tile-content>数据流:</v-list-tile-content>
-                    <v-list-tile-content class="align-end">
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-list-item>
+                    <v-list-item-content>数据流:</v-list-item-content>
+                    <v-list-item-content class="align-end">
                       {{ isEmpty(props.item.dataStreams) ? 0 : props.item.dataStreams.length }} 个
-                    </v-list-tile-content>
-                  </v-list-tile>
+                    </v-list-item-content>
+                  </v-list-item>
                 </v-list>
                 <v-divider />
                 <v-card-actions>
@@ -205,12 +198,12 @@
                   </v-btn>
                 </v-card-actions>
               </v-card>
-            </v-flex>
+            </v-col>
           </template>
         </v-data-iterator>
       </v-container>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -222,14 +215,14 @@
     data: () => ({
       productVOs: [],
       pagination: {
-        rowsPerPage: -1
+        rowsPerPage: -1,
       },
       addProductForm: {
         valid: true,
         model: {
           userId: null,
           name: '',
-          description: ''
+          description: '',
         },
         fields: {
           name: {
@@ -237,20 +230,20 @@
             label: '产品名',
             required: true,
             rules: [
-              v => !!v || '产品名为必输'
-            ]
+              v => !!v || '产品名为必输',
+            ],
           },
           description: {
             type: 'text',
             label: '产品描述',
             required: false,
             rules: [
-              v => (v.length <= 100) || '产品描述最多只能有100个字符'
-            ]
-          }
-        }
+              v => (v.length <= 100) || '产品描述最多只能有100个字符',
+            ],
+          },
+        },
       },
-      newProductDialog: false
+      newProductDialog: false,
     }),
     mounted () {
       console.log('Home mounted...')
@@ -287,7 +280,7 @@
         this.addProductForm.model = {
           userId: null,
           name: '',
-          description: ''
+          description: '',
         }
         this.$refs.newProductForm.resetValidation()
         this.newProductDialog = false
@@ -302,14 +295,14 @@
             actions: {
               false: {
                 flat: false,
-                text: '取消'
+                text: '取消',
               },
               true: {
                 color: 'red',
                 text: '确定',
-                flat: false
-              }
-            }
+                flat: false,
+              },
+            },
           }).then(value => {
             if (value) {
               this.$store.commit('setGlobalLoading', true)
@@ -326,8 +319,8 @@
           // this.$store.commit('setDrawer', true)
           return this.$router.push({ path: `/product/${productVO.product.productId}/` })
         }
-      }
-    }
+      },
+    },
   }
 </script>
 

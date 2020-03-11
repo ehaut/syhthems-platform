@@ -3,6 +3,6 @@ module.exports = {
   // https://webpack.js.org/configuration/dev-server/
   devServer: {
     port: 9090,
-    host: 'front.syhthems.local'
-  }
+    host: 'front.syhthems.local',
+  },
 }

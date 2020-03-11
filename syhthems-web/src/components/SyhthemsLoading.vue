@@ -27,8 +27,8 @@
     computed: {
       globalLoading () {
         return this.$store.state.globalLoading
-      }
-    }
+      },
+    },
   }
 </script>
 

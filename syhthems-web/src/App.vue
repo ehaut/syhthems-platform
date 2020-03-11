@@ -1,4 +1,5 @@
 <template>
+  <!-- todo -->
   <v-app
     id="inspire"
     :dark="darkTheme"
@@ -7,7 +8,7 @@
     <router-view name="toolbar" />
     <v-content>
       <v-container
-        fill-height
+        class="fill-height"
         fluid
       >
         <v-fade-transition mode="out-in">
@@ -20,19 +21,16 @@
       app
       inset
     >
-      <v-layout
-        justify-center
-        row
-        wrap
+      <v-row
+        justify="center"
       >
-        <v-flex
-          text-md-center
-          xs12
-          pa-2
+        <v-col
+          class="text-md-center pa-2"
+          cols="12"
         >
           &copy; {{ new Date().getFullYear() }} — <strong>Sunrise YDY</strong>
-        </v-flex>
-      </v-layout>
+        </v-col>
+      </v-row>
     </v-footer>
     <syhthems-loading />
   </v-app>
@@ -45,7 +43,7 @@
   export default {
     name: 'APP',
     components: {
-      SyhthemsLoading
+      SyhthemsLoading,
     },
     data () {
       return {
@@ -55,7 +53,7 @@
     computed: {
       darkTheme () {
         return this.$store.state.darkTheme
-      }
+      },
     },
     created () {
       console.log('APP created...')
@@ -75,19 +73,19 @@
           } else if (!this.$oauth2.isRefreshTokenExpired()) {
             this.$dialog.notify.error(('token已过期，即将重新获取token'), {
               position: 'bottom-right',
-              timeout: 3000
+              timeout: 3000,
             })
             this.$router.push({
               name: 'login',
               query: {
-                refreshToken: true
-              }
+                refreshToken: true,
+              },
             })
             next()
           } else {
             this.$dialog.notify.error(('token已过期，请重新登录'), {
               position: 'bottom-right',
-              timeout: 3000
+              timeout: 3000,
             })
             this.$router.push({ name: 'login' })
             next()
@@ -103,7 +101,7 @@
                                              if (response.status === 200 && !_.isEmpty(response.data) && response.data.code === 0) {
                                                this.$dialog.notify.success('请求成功', {
                                                  position: 'bottom-right',
-                                                 timeout: 2000
+                                                 timeout: 2000,
                                                })
                                              }
                                              return response
@@ -121,12 +119,12 @@
                                                console.log(error.response.headers)
                                                this.$dialog.notify.error(('Error: ' + error.response.status + ': ' + (error.response.data.message || '请求失败')), {
                                                  position: 'bottom-right',
-                                                 timeout: 3000
+                                                 timeout: 3000,
                                                })
                                                if (error.response.status === 401) {
                                                  this.$dialog.notify.error(('您的token已过期，请重新登录'), {
                                                    position: 'bottom-right',
-                                                   timeout: 3000
+                                                   timeout: 3000,
                                                  })
                                                  this.$router.push({ name: 'login' })
                                                }
@@ -136,16 +134,15 @@
                                                // http.ClientRequest in node.js
                                                this.$dialog.notify.error('Error: 无法连接服务器', {
                                                  position: 'bottom-right',
-                                                 timeout: 3000
+                                                 timeout: 3000,
                                                })
                                                console.log('error.request: ')
                                                console.log(error.request)
                                              } else {
                                                // Something happened in setting up the request that triggered an Error
-                                               // this.$toast.error('Error: ' + error.message)
                                                this.$dialog.notify.error('Error: ' + error.message, {
                                                  position: 'bottom-right',
-                                                 timeout: 3000
+                                                 timeout: 3000,
                                                })
                                                console.log('Error: ')
                                                console.log(error.message)
@@ -163,18 +160,18 @@
         if (!this.$oauth2.isRefreshTokenExpired()) {
           this.$dialog.notify.error('token已过期，正在刷新token', {
             position: 'bottom-right',
-            timeout: 3000
+            timeout: 3000,
           })
           this.$router.push({
             name: 'login',
             query: {
-              refreshToken: true
-            }
+              refreshToken: true,
+            },
           })
         } else {
           this.$dialog.notify.error('请登录', {
             position: 'bottom-right',
-            timeout: 3000
+            timeout: 3000,
           })
           this.$router.push('login')
         }
@@ -188,10 +185,10 @@
         this.$oauth2.doGetUserDetails().then(value => {
           this.$store.commit('setUserDetails', value)
           this.$store.commit('menu/setRawMenus', value.menus)
-          let routes = this.$store.getters['menu/getRoutes']
+          const routes = this.$store.getters['menu/getRoutes']
           this.$router.addRoutes(routes)
         })
-      }
-    }
+      },
+    },
   }
 </script>

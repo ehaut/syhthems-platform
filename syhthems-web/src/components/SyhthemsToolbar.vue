@@ -1,5 +1,5 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-toolbar
+<template>
+  <v-app-bar
     clipped-left
     color="blue darken-3"
     dark
@@ -9,14 +9,14 @@
     <v-toolbar-title
       class="ml-0"
     >
-      <v-toolbar-side-icon
+      <!--<v-toolbar-side-icon
         v-show="showDrawerButton"
         @click.stop="drawer = !drawer"
-      />
+      />-->
       <v-btn
         v-show="!mini && drawer"
         icon
-        flat
+        text
         class="hidden-sm-and-down"
         @click.stop="mini = !mini"
       >
@@ -25,7 +25,7 @@
       <v-btn
         v-show="mini && drawer"
         icon
-        flat
+        text
         class="hidden-sm-and-down"
         @click.stop="mini = !mini"
       >
@@ -62,38 +62,38 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-tile
+        <v-list-item
           v-if="isAuthenticated"
         >
-          <v-list-tile-title
-            text-xs-center
+          <v-list-item-title
+            text-center
             class="body-2 blue--text text--darken-3"
           >
             {{ username }}
-          </v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item
           v-if="isAuthenticated"
           @click="doLogout"
         >
-          <v-list-tile-title>登出</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile
+          <v-list-item-title>登出</v-list-item-title>
+        </v-list-item>
+        <v-list-item
           v-if="!isAuthenticated"
           to="login"
         >
-          <v-list-tile-title>登录</v-list-tile-title>
-        </v-list-tile>
+          <v-list-item-title>登录</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-menu>
-  </v-toolbar>
+  </v-app-bar>
 </template>
 
 <script>
   export default {
     name: 'SyhthemsToolbar',
     data: () => ({
-      avatarUrl: require('../assets/logo.png')
+      avatarUrl: require('../assets/logo.png'),
     }),
     computed: {
       showDrawerButton () {
@@ -105,7 +105,7 @@
         },
         set (value) {
           this.$store.commit('setDrawer', value)
-        }
+        },
       },
 
       mini: {
@@ -114,7 +114,7 @@
         },
         set (value) {
           this.$store.commit('setMini', value)
-        }
+        },
       },
 
       isAuthenticated () {
@@ -123,7 +123,7 @@
 
       username () {
         return this.isAuthenticated ? this.$oauth2.getLoginUsername() : ''
-      }
+      },
     },
     mounted () {
       //
@@ -131,8 +131,8 @@
     methods: {
       doLogout () {
         this.$oauth2.doLogout()
-      }
-    }
+      },
+    },
   }
 </script>
 

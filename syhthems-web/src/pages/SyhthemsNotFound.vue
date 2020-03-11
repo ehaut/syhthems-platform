@@ -1,28 +1,28 @@
 <template>
-  <v-layout
-    fill-height
-    align-center
-    justify-center
+  <v-row
+    class="fill-height"
+    align="center"
+    justify="center"
   >
-    <v-flex
-      xs12
-      sm6
+    <v-col
+      cols="12"
+      sm="6"
     >
       <v-card>
         <div>
           <v-container
-            fill-height
+            class="fill-height"
             fluid
           >
-            <v-layout
-              fill-height
-              align-center
-              justify-center
+            <v-row
+              class="fill-height"
+              align="center"
+              justify="center"
             >
-              <v-flex xs4>
+              <v-col cols="4">
                 <span class="headline">404 Not Found</span>
-              </v-flex>
-            </v-layout>
+              </v-col>
+            </v-row>
           </v-container>
         </div>
         <v-card-title>
@@ -39,16 +39,16 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
   export default {
     name: 'SyhthemsNotFound',
     data: () => ({
-      to: { path: '/' }
-    })
+      to: { path: '/' },
+    }),
   }
 </script>
 

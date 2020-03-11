@@ -26,18 +26,18 @@ export default class SyhthemsOAuth2 {
         namespaced: true,
         state: {
           token: this.getToken(),
-          refreshToken: this.getRefreshToken()
+          refreshToken: this.getRefreshToken(),
         },
         getters: {
           isAuthenticated (state) {
-            let token = state.token
+            const token = state.token
             return SyhthemsOAuth2._isAuthenticated(token)
           },
 
           isExpired (state) {
-            let token = state.token
+            const token = state.token
             return SyhthemsOAuth2._isExpired(token)
-          }
+          },
         },
         mutations: {
           setToken (state, token) {
@@ -46,8 +46,8 @@ export default class SyhthemsOAuth2 {
 
           setRefreshToken (state, refreshToken) {
             state.refreshToken = refreshToken
-          }
-        }
+          },
+        },
       })
     }
   }
@@ -64,20 +64,20 @@ export default class SyhthemsOAuth2 {
           if (this.isExpired() && !this.isRefreshTokenExpired()) {
             this.doRefreshTokenRequest().then(value => {
               if (requestConfig.headers) {
-                requestConfig.headers['Authorization'] = 'Bearer ' + this.getToken()
+                requestConfig.headers.Authorization = 'Bearer ' + this.getToken()
               } else {
                 requestConfig.headers = {
-                  'Authorization': 'Bearer ' + this.getToken()
+                  Authorization: 'Bearer ' + this.getToken(),
                 }
               }
               return requestConfig
             })
           }
           if (requestConfig.headers) {
-            requestConfig.headers['Authorization'] = 'Bearer ' + this.getToken()
+            requestConfig.headers.Authorization = 'Bearer ' + this.getToken()
           } else {
             requestConfig.headers = {
-              'Authorization': 'Bearer ' + this.getToken()
+              Authorization: 'Bearer ' + this.getToken(),
             }
           }
         }
@@ -94,7 +94,7 @@ export default class SyhthemsOAuth2 {
     if (token) { // Token is present
       if (token.split('.').length === 3) { // Token with a valid JWT format XXX.YYY.ZZZ
         try { // Could be a valid JWT or an access token with the same format
-          let exp = this.getTokenClaimsParameter(token, 'exp')
+          const exp = this.getTokenClaimsParameter(token, 'exp')
           if (exp && typeof exp === 'number') { // JWT with an optonal expiration claims
             return !(Math.round(new Date().getTime() / 1000) < exp)
           } else {
@@ -115,7 +115,7 @@ export default class SyhthemsOAuth2 {
    * @returns {boolean}
    */
   isAuthenticated () {
-    let token = this.getToken()
+    const token = this.getToken()
     return SyhthemsOAuth2._isAuthenticated(token)
   }
 
@@ -125,7 +125,7 @@ export default class SyhthemsOAuth2 {
    * @returns {boolean}
    */
   isExpired () {
-    let token = this.getToken()
+    const token = this.getToken()
     return SyhthemsOAuth2._isExpired(token)
   }
 
@@ -134,7 +134,7 @@ export default class SyhthemsOAuth2 {
    * @returns {*|boolean}
    */
   isRefreshTokenExpired () {
-    let refreshToken = this.getRefreshToken()
+    const refreshToken = this.getRefreshToken()
     return SyhthemsOAuth2._isExpired(refreshToken)
   }
 
@@ -183,7 +183,7 @@ export default class SyhthemsOAuth2 {
   }
 
   generateRandomState () {
-    let state = Math.random().toString(36).slice(2, 12)
+    const state = Math.random().toString(36).slice(2, 12)
     this.setRandomState(state)
     return state
   }
@@ -191,11 +191,11 @@ export default class SyhthemsOAuth2 {
   static decodeJWT (token) {
     if (token.split('.').length === 3) {
       try {
-        let headers = token.split('.')[0].replace('-', '+').replace('_', '/')
-        let payload = token.split('.')[1].replace('-', '+').replace('_', '/')
-        let rawSignature = token.split('.')[2].replace('-', '+').replace('_', '/')
-        let rawHeaders = JSON.parse(window.atob(headers))
-        let rawClaims = JSON.parse(window.atob(payload))
+        const headers = token.split('.')[0].replace('-', '+').replace('_', '/')
+        const payload = token.split('.')[1].replace('-', '+').replace('_', '/')
+        const rawSignature = token.split('.')[2].replace('-', '+').replace('_', '/')
+        const rawHeaders = JSON.parse(window.atob(headers))
+        const rawClaims = JSON.parse(window.atob(payload))
         return [rawHeaders, rawClaims, rawSignature]
       } catch (e) {
         return false
@@ -207,7 +207,7 @@ export default class SyhthemsOAuth2 {
 
   static getTokenClaimsParameter (token, parameterName) {
     if (SyhthemsOAuth2.decodeJWT(token)) {
-      let claims = SyhthemsOAuth2.decodeJWT(token)[1]
+      const claims = SyhthemsOAuth2.decodeJWT(token)[1]
       return claims[parameterName]
     } else {
       return false
@@ -230,7 +230,7 @@ export default class SyhthemsOAuth2 {
       response_type: 'code',
       client_id: this.options.clientId,
       redirect_uri: window.location.origin + window.location.pathname,
-      state: this.generateRandomState()
+      state: this.generateRandomState(),
     }, { addQueryPrefix: true })
     return loginUrl
   }
@@ -245,7 +245,7 @@ export default class SyhthemsOAuth2 {
     }
     logoutUrl += qs.stringify({
       username: username,
-      redirect_uri: window.location.origin + window.location.pathname
+      redirect_uri: window.location.origin + window.location.pathname,
     }, { addQueryPrefix: true })
     return logoutUrl
   }
@@ -307,19 +307,19 @@ export default class SyhthemsOAuth2 {
         this.setRandomState('') // 清空本地的state
         if (code) {
           // 开始获取token
-          let data = {
+          const data = {
             grant_type: 'authorization_code',
             code: code,
             redirect_uri: window.location.origin + window.location.pathname,
-            client_id: this.options.clientId
+            client_id: this.options.clientId,
           }
-          let requestConfig = {
+          const requestConfig = {
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
             baseURL: this.options.authorizationServer,
             auth: {
               username: this.options.clientId,
-              password: this.options.clientSecret
-            }
+              password: this.options.clientSecret,
+            },
           }
           this.$_http.post('/oauth/token', qs.stringify(data), requestConfig)
               .then((response) => {
@@ -364,17 +364,17 @@ export default class SyhthemsOAuth2 {
   doRefreshTokenRequest () {
     return new Promise((resolve, reject) => {
       if (this.isExpired() && !this.isRefreshTokenExpired()) {
-        let data = {
+        const data = {
           grant_type: 'refresh_token',
-          refresh_token: this.getRefreshToken()
+          refresh_token: this.getRefreshToken(),
         }
-        let requestConfig = {
+        const requestConfig = {
           headers: { 'content-type': 'application/x-www-form-urlencoded' },
           baseURL: this.options.authorizationServer,
           auth: {
             username: this.options.clientId,
-            password: this.options.clientSecret
-          }
+            password: this.options.clientSecret,
+          },
         }
         this.$_http.post('/oauth/token', qs.stringify(data), requestConfig)
             .then((response) => {

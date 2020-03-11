@@ -1,13 +1,10 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex sm12>
+<template>
+  <v-row>
+    <v-col sm="12">
       <v-card>
         <v-toolbar class="mb-2">
           <v-btn
-            flat
+            text
             :to="toProduct"
           >
             <v-icon>$vuetify.icons.prev</v-icon>
@@ -25,12 +22,10 @@
         </v-toolbar>
         <v-container
           fluid
-          grid-list-md
         >
           <v-data-iterator
             :items="dataStreams"
-            content-tag="v-layout"
-            hide-actions
+            hide-default-footer
             no-data-text="该产品没有数据流"
             row
             wrap
@@ -68,9 +63,9 @@
                         lazy-validation
                       >
                         <v-container>
-                          <v-layout wrap>
-                            <v-flex
-                              xs12
+                          <v-row>
+                            <v-col
+                              cols="12"
                             >
                               <v-text-field
                                 v-model="newDataStreamFormScheme.model.dataStreamCode"
@@ -80,28 +75,28 @@
                                 :hint="newDataStreamFormScheme.fields.dataStreamCode.hint"
                                 :type="newDataStreamFormScheme.fields.dataStreamCode.type"
                               />
-                            </v-flex>
-                            <v-flex
-                              xs12
-                              sm6
+                            </v-col>
+                            <v-col
+                              cols="12"
+                              sm="6"
                             >
                               <v-text-field
                                 v-model="newDataStreamFormScheme.model.unit"
                                 :label="newDataStreamFormScheme.fields.unit.label"
                                 :rules="newDataStreamFormScheme.fields.unit.rules"
                               />
-                            </v-flex>
-                            <v-flex
-                              xs12
-                              sm6
+                            </v-col>
+                            <v-col
+                              cols="12"
+                              sm="6"
                             >
                               <v-text-field
                                 v-model="newDataStreamFormScheme.model.unitSymbol"
                                 :label="newDataStreamFormScheme.fields.unitSymbol.label"
                                 :rules="newDataStreamFormScheme.fields.unitSymbol.rules"
                               />
-                            </v-flex>
-                          </v-layout>
+                            </v-col>
+                          </v-row>
                         </v-container>
                       </v-form>
                     </v-card-text>
@@ -125,35 +120,35 @@
               </v-toolbar>
             </template>
             <template v-slot:item="props">
-              <v-flex
-                xs12
-                sm6
-                md4
+              <v-col
+                cols="12"
+                sm="6"
+                md="4"
               >
                 <v-card>
                   <v-list dense>
-                    <v-list-tile>
-                      <v-list-tile-content class="title">
+                    <v-list-item>
+                      <v-list-item-content class="title">
                         数据流编码：
-                      </v-list-tile-content>
-                      <v-list-tile-content class="align-end title">
+                      </v-list-item-content>
+                      <v-list-item-content class="align-end title">
                         {{ props.item.dataStreamCode }}
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      </v-list-item-content>
+                    </v-list-item>
                     <v-divider />
-                    <v-list-tile>
-                      <v-list-tile-content>数据流单位： </v-list-tile-content>
-                      <v-list-tile-content class="align-end">
+                    <v-list-item>
+                      <v-list-item-content>数据流单位： </v-list-item-content>
+                      <v-list-item-content class="align-end">
                         {{ props.item.unit }}
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      </v-list-item-content>
+                    </v-list-item>
                     <v-divider />
-                    <v-list-tile>
-                      <v-list-tile-content>数据流单位符号：</v-list-tile-content>
-                      <v-list-tile-content class="align-end">
+                    <v-list-item>
+                      <v-list-item-content>数据流单位符号：</v-list-item-content>
+                      <v-list-item-content class="align-end">
                         {{ props.item.unitSymbol }}
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      </v-list-item-content>
+                    </v-list-item>
                   </v-list>
                   <v-divider />
                   <v-card-actions>
@@ -174,12 +169,12 @@
                     </v-btn>
                   </v-card-actions>
                 </v-card>
-              </v-flex>
+              </v-col>
             </template>
           </v-data-iterator>
         </v-container>
       </v-card>
-    </v-flex>
+    </v-col>
     <v-dialog
       v-model="updateDataStreamDialog"
       persistent
@@ -196,9 +191,9 @@
             lazy-validation
           >
             <v-container>
-              <v-layout wrap>
-                <v-flex
-                  xs12
+              <v-row>
+                <v-col
+                  cols="12"
                 >
                   <v-text-field
                     v-model="updateDataStreamFormScheme.model.dataStreamCode"
@@ -208,28 +203,28 @@
                     :hint="updateDataStreamFormScheme.fields.dataStreamCode.hint"
                     :type="updateDataStreamFormScheme.fields.dataStreamCode.type"
                   />
-                </v-flex>
-                <v-flex
-                  xs12
-                  sm6
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="6"
                 >
                   <v-text-field
                     v-model="updateDataStreamFormScheme.model.unit"
                     :label="updateDataStreamFormScheme.fields.unit.label"
                     :rules="updateDataStreamFormScheme.fields.unit.rules"
                   />
-                </v-flex>
-                <v-flex
-                  xs12
-                  sm6
+                </v-col>
+                <v-col
+                  cols="12"
+                  sm="6"
                 >
                   <v-text-field
                     v-model="updateDataStreamFormScheme.model.unitSymbol"
                     :label="updateDataStreamFormScheme.fields.unitSymbol.label"
                     :rules="updateDataStreamFormScheme.fields.unitSymbol.rules"
                   />
-                </v-flex>
-              </v-layout>
+                </v-col>
+              </v-row>
             </v-container>
           </v-form>
         </v-card-text>
@@ -250,7 +245,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>
@@ -271,7 +266,7 @@
           dataStreamId: '',
           dataStreamCode: '',
           unit: '',
-          unitSymbol: ''
+          unitSymbol: '',
         },
         fields: {
           dataStreamCode: {
@@ -280,26 +275,26 @@
             hint: '设备上传数据时的参数名',
             required: true,
             rules: [
-              v => !!v || '数据流编码必输'
-            ]
+              v => !!v || '数据流编码必输',
+            ],
           },
           unit: {
             type: 'text',
             label: '数据单位',
             required: true,
             rules: [
-              v => !!v || '数据单位必输'
-            ]
+              v => !!v || '数据单位必输',
+            ],
           },
           unitSymbol: {
             type: 'text',
             label: '数据单位符号',
             required: true,
             rules: [
-              v => !!v || '数据单位符号必输'
-            ]
-          }
-        }
+              v => !!v || '数据单位符号必输',
+            ],
+          },
+        },
       },
       updateDataStreamFormScheme: {
         valid: true,
@@ -308,7 +303,7 @@
           dataStreamId: '',
           dataStreamCode: '',
           unit: '',
-          unitSymbol: ''
+          unitSymbol: '',
         },
         fields: {
           dataStreamCode: {
@@ -317,27 +312,27 @@
             hint: '设备上传数据时的参数名',
             required: true,
             rules: [
-              v => !!v || '数据流编码必输'
-            ]
+              v => !!v || '数据流编码必输',
+            ],
           },
           unit: {
             type: 'text',
             label: '数据单位',
             required: true,
             rules: [
-              v => !!v || '数据单位必输'
-            ]
+              v => !!v || '数据单位必输',
+            ],
           },
           unitSymbol: {
             type: 'text',
             label: '数据单位符号',
             required: true,
             rules: [
-              v => !!v || '数据单位符号必输'
-            ]
-          }
-        }
-      }
+              v => !!v || '数据单位符号必输',
+            ],
+          },
+        },
+      },
     }),
     computed: {
       productVO: {
@@ -347,7 +342,7 @@
         },
         set (value) {
           this.$store.commit('setProductVO', value)
-        }
+        },
       },
       dataStreams: {
         get () {
@@ -356,16 +351,16 @@
         set (value) {
           this.productVO = {
             ...this.productVO,
-            dataStreams: value
+            dataStreams: value,
           }
-        }
+        },
       },
       productId () {
         return this.$store.getters.productId
       },
       toProduct () {
         return { path: `/product/${this.productId}` }
-      }
+      },
     },
     created () {
       this.getDataStreams()
@@ -375,9 +370,9 @@
         if (this.productId) {
           this.$store.commit('setGlobalLoading', true)
           this.$http.get('/ds' + qs.stringify({
-            productId: this.productId
+            productId: this.productId,
           }, {
-            addQueryPrefix: true
+            addQueryPrefix: true,
           })).then(res => {
             if (res.data.code === 0) {
               this.dataStreams = res.data.data
@@ -386,7 +381,7 @@
         } else {
           this.$dialog.notify.error(('您还没有选择产品！即将为您跳转到首页'), {
             position: 'bottom-right',
-            timeout: 3000
+            timeout: 3000,
           })
           this.$router.push({ path: '/' })
         }
@@ -409,7 +404,7 @@
       updateDataStreamButton (dataStream) {
         // 一定要用这种方法赋值，返回的是新的对象，而不会修改原来的对象
         this.updateDataStreamFormScheme.model = {
-          ...dataStream
+          ...dataStream,
         }
         this.updateDataStreamDialog = true
       },
@@ -431,7 +426,7 @@
           dataStreamId: '',
           dataStreamCode: '',
           unit: '',
-          unitSymbol: ''
+          unitSymbol: '',
         }
         this.$refs.newDataStreamForm.resetValidation()
         this.newDataStreamDialog = false
@@ -442,7 +437,7 @@
           dataStreamId: '',
           dataStreamCode: '',
           unit: '',
-          unitSymbol: ''
+          unitSymbol: '',
         }
         this.$refs.updateDataStreamForm.resetValidation()
         this.updateDataStreamDialog = false
@@ -457,14 +452,14 @@
             actions: {
               false: {
                 flat: false,
-                text: '取消'
+                text: '取消',
               },
               true: {
                 color: 'red',
                 text: '确定',
-                flat: false
-              }
-            }
+                flat: false,
+              },
+            },
           }).then(value => {
             if (value) {
               this.$store.commit('setGlobalLoading', true)
@@ -474,8 +469,8 @@
             }
           })
         }
-      }
-    }
+      },
+    },
   }
 </script>
 

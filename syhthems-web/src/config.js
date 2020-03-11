@@ -1,6 +1,6 @@
 const config = {
   apiUrl: process.env.SYHTHEMS_API_URL || 'http://gateway.syhthems.local:8080/api/web/api',
-  ssoUrl: process.env.SYHTHEMS_SSO_URL || 'http://gateway.syhthems.local:8080/sso'
+  ssoUrl: process.env.SYHTHEMS_SSO_URL || 'http://gateway.syhthems.local:8080/sso',
 }
 
 config.oauth2 = {
@@ -13,7 +13,7 @@ config.oauth2 = {
   tokenInfoUrl: `${config.ssoUrl}/oauth/check_token`,
   tokenName: 'token',
   storage: 'localStorage',
-  tokenType: 'Bearer'
+  tokenType: 'Bearer',
 }
 
 export default config

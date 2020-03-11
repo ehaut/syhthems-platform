@@ -1,13 +1,10 @@
-<template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
-  <v-layout
-    row
-    wrap
-  >
-    <v-flex sm12>
+<template>
+  <v-row>
+    <v-col sm="12">
       <v-card>
         <v-toolbar class="mb-2">
           <v-btn
-            flat
+            text
             :to="toProduct"
           >
             <v-icon>$vuetify.icons.prev</v-icon>
@@ -25,12 +22,10 @@
         </v-toolbar>
         <v-container
           fluid
-          grid-list-md
         >
           <v-data-iterator
             :items="devices"
-            content-tag="v-layout"
-            hide-actions
+            hide-default-footer
             no-data-text="该产品没有设备"
             row
             wrap
@@ -69,9 +64,9 @@
                         lazy-validation
                       >
                         <v-container>
-                          <v-layout wrap>
-                            <v-flex
-                              xs12
+                          <v-row>
+                            <v-col
+                              cols="12"
                             >
                               <v-text-field
                                 v-model="newDeviceFormScheme.model.name"
@@ -79,9 +74,9 @@
                                 :rules="newDeviceFormScheme.fields.name.rules"
                                 :required="newDeviceFormScheme.fields.name.required"
                               />
-                            </v-flex>
-                            <v-flex
-                              xs12
+                            </v-col>
+                            <v-col
+                              cols="12"
                             >
                               <v-text-field
                                 v-model="newDeviceFormScheme.model.code"
@@ -89,9 +84,9 @@
                                 :rules="newDeviceFormScheme.fields.code.rules"
                                 :required="newDeviceFormScheme.fields.code.required"
                               />
-                            </v-flex>
-                            <v-flex
-                              xs12
+                            </v-col>
+                            <v-col
+                              cols="12"
                             >
                               <v-text-field
                                 v-model="newDeviceFormScheme.model.deviceSecret"
@@ -112,25 +107,25 @@
                                   </v-btn>
                                 </template>
                               </v-text-field>
-                            </v-flex>
-                            <v-flex
-                              xs12
+                            </v-col>
+                            <v-col
+                              cols="12"
                             >
                               <v-text-field
                                 v-model="newDeviceFormScheme.model.description"
                                 :label="newDeviceFormScheme.fields.description.label"
                                 :rules="newDeviceFormScheme.fields.description.rules"
                               />
-                            </v-flex>
-                            <v-flex
-                              xs12
+                            </v-col>
+                            <v-col
+                              cols="12"
                             >
                               <v-text-field
                                 v-model="newDeviceFormScheme.model.tags"
                                 :label="newDeviceFormScheme.fields.tags.label"
                               />
-                            </v-flex>
-                          </v-layout>
+                            </v-col>
+                          </v-row>
                         </v-container>
                       </v-form>
                     </v-card-text>
@@ -154,59 +149,59 @@
               </v-toolbar>
             </template>
             <template v-slot:item="props">
-              <v-flex
-                xs12
-                sm6
-                md5
+              <v-col
+                cols="12"
+                sm="6"
+                md="5"
               >
                 <v-card
                   hover
                   @click="choiceDevice(props.item.deviceId)"
                 >
                   <v-list dense>
-                    <v-list-tile>
-                      <v-list-tile-content class="title">
+                    <v-list-item>
+                      <v-list-item-content class="title">
                         设备ID：
-                      </v-list-tile-content>
-                      <v-list-tile-content class="align-end">
+                      </v-list-item-content>
+                      <v-list-item-content class="align-end">
                         {{ props.item.deviceId }}
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      </v-list-item-content>
+                    </v-list-item>
                     <v-divider />
-                    <v-list-tile>
-                      <v-list-tile-content>设备密钥： </v-list-tile-content>
-                      <v-list-tile-content class="align-end">
+                    <v-list-item>
+                      <v-list-item-content>设备密钥： </v-list-item-content>
+                      <v-list-item-content class="align-end">
                         {{ props.item.deviceSecret }}
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      </v-list-item-content>
+                    </v-list-item>
                     <v-divider />
-                    <v-list-tile>
-                      <v-list-tile-content>设备编号：</v-list-tile-content>
-                      <v-list-tile-content class="align-end">
+                    <v-list-item>
+                      <v-list-item-content>设备编号：</v-list-item-content>
+                      <v-list-item-content class="align-end">
                         {{ props.item.code }}
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      </v-list-item-content>
+                    </v-list-item>
                     <v-divider />
-                    <v-list-tile>
-                      <v-list-tile-content>设备名称：</v-list-tile-content>
-                      <v-list-tile-content class="align-end">
+                    <v-list-item>
+                      <v-list-item-content>设备名称：</v-list-item-content>
+                      <v-list-item-content class="align-end">
                         {{ props.item.name }}
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      </v-list-item-content>
+                    </v-list-item>
                     <v-divider />
-                    <v-list-tile>
-                      <v-list-tile-content> 设备简介：</v-list-tile-content>
-                      <v-list-tile-content class="align-end">
+                    <v-list-item>
+                      <v-list-item-content> 设备简介：</v-list-item-content>
+                      <v-list-item-content class="align-end">
                         {{ props.item.description }}
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      </v-list-item-content>
+                    </v-list-item>
                     <v-divider />
-                    <v-list-tile>
-                      <v-list-tile-content> 设备标签：</v-list-tile-content>
-                      <v-list-tile-content class="align-end">
+                    <v-list-item>
+                      <v-list-item-content> 设备标签：</v-list-item-content>
+                      <v-list-item-content class="align-end">
                         {{ props.item.tags }}
-                      </v-list-tile-content>
-                    </v-list-tile>
+                      </v-list-item-content>
+                    </v-list-item>
                   </v-list>
                   <v-divider />
                   <v-card-actions>
@@ -227,12 +222,12 @@
                     </v-btn>
                   </v-card-actions>
                 </v-card>
-              </v-flex>
+              </v-col>
             </template>
           </v-data-iterator>
         </v-container>
       </v-card>
-    </v-flex>
+    </v-col>
     <v-dialog
       v-model="updateDeviceDialog"
       persistent
@@ -249,9 +244,9 @@
             lazy-validation
           >
             <v-container>
-              <v-layout wrap>
-                <v-flex
-                  xs12
+              <v-row>
+                <v-col
+                  cols="12"
                 >
                   <v-text-field
                     v-model="updateDeviceFormScheme.model.name"
@@ -259,9 +254,9 @@
                     :rules="updateDeviceFormScheme.fields.name.rules"
                     :required="updateDeviceFormScheme.fields.name.required"
                   />
-                </v-flex>
-                <v-flex
-                  xs12
+                </v-col>
+                <v-col
+                  cols="12"
                 >
                   <v-text-field
                     v-model="updateDeviceFormScheme.model.code"
@@ -269,9 +264,9 @@
                     :rules="updateDeviceFormScheme.fields.code.rules"
                     :required="updateDeviceFormScheme.fields.code.required"
                   />
-                </v-flex>
-                <v-flex
-                  xs12
+                </v-col>
+                <v-col
+                  cols="12"
                 >
                   <v-text-field
                     v-model="updateDeviceFormScheme.model.deviceSecret"
@@ -292,25 +287,25 @@
                       </v-btn>
                     </template>
                   </v-text-field>
-                </v-flex>
-                <v-flex
-                  xs12
+                </v-col>
+                <v-col
+                  cols="12"
                 >
                   <v-text-field
                     v-model="updateDeviceFormScheme.model.description"
                     :label="updateDeviceFormScheme.fields.description.label"
                     :rules="updateDeviceFormScheme.fields.description.rules"
                   />
-                </v-flex>
-                <v-flex
-                  xs12
+                </v-col>
+                <v-col
+                  cols="12"
                 >
                   <v-text-field
                     v-model="updateDeviceFormScheme.model.tags"
                     :label="updateDeviceFormScheme.fields.tags.label"
                   />
-                </v-flex>
-              </v-layout>
+                </v-col>
+              </v-row>
             </v-container>
           </v-form>
         </v-card-text>
@@ -331,7 +326,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-layout>
+  </v-row>
 </template>
 
 <script>
@@ -355,7 +350,7 @@
           code: '',
           name: '',
           description: '',
-          tags: ''
+          tags: '',
         },
         fields: {
           name: {
@@ -363,8 +358,8 @@
             label: '设备名称',
             required: true,
             rules: [
-              v => !!v || '设备名称必输'
-            ]
+              v => !!v || '设备名称必输',
+            ],
           },
           code: {
             type: 'text',
@@ -372,8 +367,8 @@
             hint: '设备的唯一识别码',
             required: true,
             rules: [
-              v => !!v || '设备编码必输'
-            ]
+              v => !!v || '设备编码必输',
+            ],
           },
           deviceSecret: {
             type: 'text',
@@ -381,21 +376,21 @@
             hint: '设备接入平台的凭证',
             required: true,
             rules: [
-              v => !!v || '设备密钥必输'
-            ]
+              v => !!v || '设备密钥必输',
+            ],
           },
           description: {
             type: 'text',
             label: '设备简介',
             rules: [
-              v => v.length < 256 || '设备简介不能超过256字符'
-            ]
+              v => v.length < 256 || '设备简介不能超过256字符',
+            ],
           },
           tags: {
             type: 'text',
-            label: '设备标签'
-          }
-        }
+            label: '设备标签',
+          },
+        },
       },
       updateDeviceFormScheme: {
         valid: true,
@@ -406,7 +401,7 @@
           code: '',
           name: '',
           description: '',
-          tags: ''
+          tags: '',
         },
         fields: {
           name: {
@@ -414,8 +409,8 @@
             label: '设备名称',
             required: true,
             rules: [
-              v => !!v || '设备名称必输'
-            ]
+              v => !!v || '设备名称必输',
+            ],
           },
           code: {
             type: 'text',
@@ -423,8 +418,8 @@
             hint: '设备的唯一识别码',
             required: true,
             rules: [
-              v => !!v || '设备编码必输'
-            ]
+              v => !!v || '设备编码必输',
+            ],
           },
           deviceSecret: {
             type: 'text',
@@ -432,22 +427,22 @@
             hint: '设备接入平台的凭证',
             required: true,
             rules: [
-              v => !!v || '设备密钥必输'
-            ]
+              v => !!v || '设备密钥必输',
+            ],
           },
           description: {
             type: 'text',
             label: '设备简介',
             rules: [
-              v => v.length < 256 || '设备简介不能超过256字符'
-            ]
+              v => v.length < 256 || '设备简介不能超过256字符',
+            ],
           },
           tags: {
             type: 'text',
-            label: '设备标签'
-          }
-        }
-      }
+            label: '设备标签',
+          },
+        },
+      },
     }),
     computed: {
       productVO: {
@@ -457,7 +452,7 @@
         },
         set (value) {
           this.$store.commit('setProductVO', value)
-        }
+        },
       },
       devices: {
         get () {
@@ -466,16 +461,16 @@
         set (value) {
           this.productVO = {
             ...this.productVO,
-            devices: value
+            devices: value,
           }
-        }
+        },
       },
       productId () {
         return this.$store.getters.productId
       },
       toProduct () {
         return { path: `/product/${this.productId}` }
-      }
+      },
     },
     created () {
       this.getDevices()
@@ -485,9 +480,9 @@
         if (this.productId) {
           this.$store.commit('setGlobalLoading', true)
           this.$http.get('/device' + qs.stringify({
-            productId: this.productId
+            productId: this.productId,
           }, {
-            addQueryPrefix: true
+            addQueryPrefix: true,
           })).then(res => {
             if (res.data.code === 0) {
               this.devices = res.data.data
@@ -496,7 +491,7 @@
         } else {
           this.$dialog.notify.error(('您还没有选择产品！即将为您跳转到首页'), {
             position: 'bottom-right',
-            timeout: 3000
+            timeout: 3000,
           })
           this.$router.push({ path: '/' })
         }
@@ -519,7 +514,7 @@
       updateDeviceButton (device) {
         // 一定要用这种方法赋值，返回的是新的对象，而不会修改原来的对象
         this.updateDeviceFormScheme.model = {
-          ...device
+          ...device,
         }
         this.updateDeviceDialog = true
       },
@@ -543,7 +538,7 @@
           code: '',
           name: '',
           description: '',
-          tags: ''
+          tags: '',
         }
         this.$refs.newDeviceForm.resetValidation()
         this.newDeviceDialog = false
@@ -556,7 +551,7 @@
           code: '',
           name: '',
           description: '',
-          tags: ''
+          tags: '',
         }
         this.$refs.updateDeviceForm.resetValidation()
         this.updateDeviceDialog = false
@@ -571,14 +566,14 @@
             actions: {
               false: {
                 flat: false,
-                text: '取消'
+                text: '取消',
               },
               true: {
                 color: 'red',
                 text: '确定',
-                flat: false
-              }
-            }
+                flat: false,
+              },
+            },
           }).then(value => {
             if (value) {
               this.$store.commit('setGlobalLoading', true)
@@ -595,8 +590,8 @@
       choiceDevice (deviceId) {
         this.$store.commit('setDeviceId', deviceId)
         this.$router.push({ name: 'DEVICE' })
-      }
-    }
+      },
+    },
   }
 </script>
 

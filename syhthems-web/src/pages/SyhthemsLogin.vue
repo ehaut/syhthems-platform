@@ -1,19 +1,17 @@
 <template>
-  <v-layout
-    align-center
-    justify-center
-    row
-    wrap
+  <v-row
+    align="center"
+    justify="center"
   >
     <span
       v-if="loading"
       class="inline-box"
     />
-    <v-flex
+    <v-col
       v-if="loading"
-      xs2
-      md2
-      sm2
+      cols="2"
+      md="2"
+      sm="2"
     >
       <v-progress-circular
         indeterminate
@@ -21,10 +19,10 @@
       <p class="body-1">
         登录中...
       </p>
-    </v-flex>
-    <v-flex
+    </v-col>
+    <v-col
       v-show="!loading"
-      md4
+      md="4"
     >
       <v-card>
         <v-card-title primary-title>
@@ -48,8 +46,8 @@
           </v-btn>
         </v-card-actions>
       </v-card>
-    </v-flex>
-  </v-layout>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
@@ -62,13 +60,13 @@
         loginUrl: '',
         error: '',
         msg: '请点击下方按钮登录',
-        buttonMsg: '点击登录'
+        buttonMsg: '点击登录',
       }
     },
     computed: {
       isAuthenticated () {
         return this.$store.getters['oauth2/isAuthenticated']
-      }
+      },
     },
     created () {
       //
@@ -153,7 +151,7 @@
           localStorage.setItem('redirect_uri', vm.redirectFrom.fullPath)
         }
       })
-    }
+    },
   }
 </script>
 

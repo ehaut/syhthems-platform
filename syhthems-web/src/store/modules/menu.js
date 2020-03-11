@@ -2,7 +2,7 @@ const _ = require('lodash/core')
 
 // state
 const state = {
-  rawMenus: []
+  rawMenus: [],
 }
 
 // getters
@@ -31,7 +31,7 @@ const getters = {
           path: rawMenu.path,
           menuComponent: rawMenu.menuComponent,
           icon: rawMenu.icon,
-          children: getters.rawMenus2Menus(getters.childRawMenusOf(rawMenu.menuId))
+          children: getters.rawMenus2Menus(getters.childRawMenusOf(rawMenu.menuId)),
         }
       }, getters)
     }
@@ -39,16 +39,16 @@ const getters = {
 
   getRoutes: (state, getters) => {
     // 过滤掉类型为按钮的数据和path为空的父级菜单
-    let filterRawMenus = state.rawMenus.filter(rawMenu => ((rawMenu.type === '0') && rawMenu.path))
-    let routes = getters.rawMenus2Routes(filterRawMenus)
+    const filterRawMenus = state.rawMenus.filter(rawMenu => ((rawMenu.type === '0') && rawMenu.path))
+    const routes = getters.rawMenus2Routes(filterRawMenus)
     routes.push({
       path: '*',
       components: {
         default: require('../../pages/SyhthemsNotFound').default,
         main: require('../../components/SyhthemsMain').default,
-        toolbar: require('../../components/SyhthemsToolbar').default
+        toolbar: require('../../components/SyhthemsToolbar').default,
       },
-      name: '404'
+      name: '404',
     })
     return routes
   },
@@ -63,13 +63,13 @@ const getters = {
           components: {
             default: require(`../../pages/${rawMenu.menuComponent}`).default,
             main: require('../../components/SyhthemsMain').default,
-            toolbar: require('../../components/SyhthemsToolbar').default
+            toolbar: require('../../components/SyhthemsToolbar').default,
           },
-          name: rawMenu.menuCode
+          name: rawMenu.menuCode,
         }
       }, getters)
     }
-  }
+  },
 }
 
 // actions
@@ -79,7 +79,7 @@ const actions = {}
 const mutations = {
   setRawMenus (state, rawMenus) {
     state.rawMenus = rawMenus
-  }
+  },
 }
 
 export default {
@@ -87,5 +87,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 }
