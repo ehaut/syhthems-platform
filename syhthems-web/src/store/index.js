@@ -26,9 +26,10 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    setDarkTheme (state, darkTheme) {
-      state.darkTheme = darkTheme === true
-      window.localStorage.setItem('darkTheme', darkTheme)
+    setDarkTheme (state, payload) {
+      state.darkTheme = payload.darkTheme === true
+      payload.theme.dark = payload.darkTheme
+      window.localStorage.setItem('darkTheme', payload.darkTheme)
     },
 
     setDrawer (state, drawer) {
