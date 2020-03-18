@@ -9,7 +9,7 @@ function route (path, name, component, children) {
     name,
     components: {
       default: require(`./pages/${component}`).default,
-      main: require('./components/SyhthemsMain').default,
+      menu: require('./components/SyhthemsMenu').default,
       toolbar: require('./components/SyhthemsToolbar').default,
     },
     children,

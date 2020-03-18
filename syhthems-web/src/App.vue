@@ -4,7 +4,7 @@
     id="inspire"
     :dark="darkTheme"
   >
-    <router-view name="main" />
+    <router-view name="menu" />
     <router-view name="toolbar" />
     <v-content>
       <v-container

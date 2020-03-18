@@ -77,7 +77,7 @@
 
 <script>
   export default {
-    name: 'Main',
+    name: 'Menu',
     data: () => ({
       loading: false,
     }),
@@ -114,7 +114,7 @@
       },
     },
     created () {
-      console.log('SyhthemsMain created...')
+      console.log('SyhthemsMenu created...')
 
       if (this.$store.state.productVO) {
         this.$store.commit('setDrawer', true)
@@ -123,7 +123,7 @@
       }
     },
     mounted () {
-      console.log('SyhthemsMain mounted...')
+      console.log('SyhthemsMenu mounted...')
     },
     methods: {
       getRouterLink (menu) {
