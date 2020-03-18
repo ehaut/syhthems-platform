@@ -9,10 +9,10 @@
     <v-toolbar-title
       class="ml-0"
     >
-      <!--<v-toolbar-side-icon
+      <v-app-bar-nav-icon
         v-show="showDrawerButton"
         @click.stop="drawer = !drawer"
-      />-->
+      />
       <v-btn
         v-show="!mini && drawer"
         icon
