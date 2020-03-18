@@ -45,7 +45,7 @@ const getters = {
       path: '*',
       components: {
         default: require('../../pages/SyhthemsNotFound').default,
-        main: require('../../components/SyhthemsMain').default,
+        menu: require('../../components/SyhthemsMenu').default,
         toolbar: require('../../components/SyhthemsToolbar').default,
       },
       name: '404',
@@ -62,7 +62,7 @@ const getters = {
           path: rawMenu.path,
           components: {
             default: require(`../../pages/${rawMenu.menuComponent}`).default,
-            main: require('../../components/SyhthemsMain').default,
+            menu: require('../../components/SyhthemsMenu').default,
             toolbar: require('../../components/SyhthemsToolbar').default,
           },
           name: rawMenu.menuCode,
