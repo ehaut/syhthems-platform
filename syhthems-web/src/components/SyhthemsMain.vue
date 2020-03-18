@@ -32,18 +32,15 @@
         <v-card>
           <v-list>
             <template v-for="menu in menus">
-              <!-- todo -->
               <v-list-group
                 v-if="menu.children && menu.children.length !== 0"
                 :key="menu.menuCode"
                 :prepend-icon="menu.icon"
               >
-                <template v-slot:activator="{}">
-                  <v-list-item>
-                    <v-list-item-content>
-                      <v-list-item-title>{{ menu.menuName }}</v-list-item-title>
-                    </v-list-item-content>
-                  </v-list-item>
+                <template v-slot:activator>
+                  <v-list-item-content>
+                    <v-list-item-title>{{ menu.menuName }}</v-list-item-title>
+                  </v-list-item-content>
                 </template>
                 <v-list-item
                   v-for="child in menu.children"
