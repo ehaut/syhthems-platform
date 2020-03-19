@@ -8,7 +8,6 @@
     <router-view name="toolbar" />
     <v-content>
       <v-container
-        class="fill-height"
         fluid
       >
         <v-fade-transition mode="out-in">
