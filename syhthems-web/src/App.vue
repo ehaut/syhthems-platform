@@ -100,7 +100,7 @@
                                              if (response.status === 200 && !_.isEmpty(response.data) && response.data.code === 0) {
                                                this.$dialog.notify.success('请求成功', {
                                                  position: 'bottom-right',
-                                                 timeout: 2000,
+                                                 timeout: 1000,
                                                })
                                              }
                                              return response
