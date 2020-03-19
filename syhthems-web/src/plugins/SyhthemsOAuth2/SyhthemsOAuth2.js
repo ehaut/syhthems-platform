@@ -235,29 +235,29 @@ export default class SyhthemsOAuth2 {
     return loginUrl
   }
 
-  getLogoutUrl () {
+  getLogoutUrl (username) {
     let logoutUrl = this.options.authorizationServer + '/logout'
-    let username
-    if (this.$_store.state.userDetails) {
-      username = this.$_store.state.userDetails.username
-    } else if (SyhthemsOAuth2.getTokenClaimsParameter('user_name')) {
-      username = SyhthemsOAuth2.getTokenClaimsParameter('user_name')
-    }
     logoutUrl += qs.stringify({
       username: username,
-      redirect_uri: window.location.origin + window.location.pathname,
+      redirect_uri: window.location.origin,
     }, { addQueryPrefix: true })
     return logoutUrl
   }
 
   doLogout () {
     if (this.isAuthenticated()) {
+      let username
+      if (this.$_store.state.userDetails) {
+        username = this.$_store.state.userDetails.username
+      } else if (SyhthemsOAuth2.getTokenClaimsParameter('user_name')) {
+        username = SyhthemsOAuth2.getTokenClaimsParameter('user_name')
+      }
       this.setToken('')
       this.setRefreshToken('')
       this.$_store.commit('setUserDetails', null)
       this.$_store.commit('setProduct', null)
       this.$_store.commit('setDevices', [])
-      window.location.href = this.getLogoutUrl()
+      window.location.href = this.getLogoutUrl(username)
     }
   }
 

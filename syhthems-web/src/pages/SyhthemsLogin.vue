@@ -81,8 +81,10 @@
             this.msg = '登录成功，正在为您跳转...'
             if (this.redirectFrom) {
               window.location.href = window.location.origin + this.redirectFrom.fullPath
+              console.log('this.redirectFrom.fullPath:' + this.redirectFrom.fullPath)
             } else if (localStorage.getItem('redirect_uri')) {
               window.location.href = window.location.origin + localStorage.getItem('redirect_uri')
+              console.log('localStorage.getItem(\'redirect_uri\')' + localStorage.getItem('redirect_uri'))
             } else {
               window.location.href = window.location.origin + '/'
             }
@@ -103,8 +105,10 @@
               this.msg = '登录成功，正在为您跳转...'
               if (this.redirectFrom) {
                 window.location.href = window.location.origin + this.redirectFrom.fullPath
+                console.log('this.redirectFrom.fullPath:' + this.redirectFrom.fullPath)
               } else if (localStorage.getItem('redirect_uri')) {
                 window.location.href = window.location.origin + localStorage.getItem('redirect_uri')
+                console.log('localStorage.getItem(\'redirect_uri\')' + localStorage.getItem('redirect_uri'))
               } else {
                 window.location.href = window.location.origin + '/'
               }
@@ -121,8 +125,10 @@
         this.msg = '你已登录'
         if (this.redirectFrom) {
           window.location.href = window.location.origin + this.redirectFrom.fullPath
+          console.log('this.redirectFrom.fullPath:' + this.redirectFrom.fullPath)
         } else if (localStorage.getItem('redirect_uri')) {
           window.location.href = window.location.origin + localStorage.getItem('redirect_uri')
+          console.log('localStorage.getItem(\'redirect_uri\')' + localStorage.getItem('redirect_uri'))
         } else {
           window.location.href = window.location.origin + '/'
         }
@@ -144,7 +150,7 @@
     beforeRouteEnter (to, from, next) {
       next(vm => {
         // 通过 `vm` 访问组件实例
-        if (from && from.fullPath !== '/') {
+        if (from) {
           vm.redirectFrom = from
           console.log('Login beforeRouteEnter 的回调函数执行了... redirectFrom: ' + vm.redirectFrom.fullPath)
           // 将redirectFrom存起来
