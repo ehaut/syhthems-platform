@@ -4,7 +4,7 @@ syhthems 是一个开源的物联网平台项目，它可以实现物联网产�
 
 **文档：**[http://syhthems.ehaut.cn/](http://syhthems.ehaut.cn/)
 
-**微服务架构改造** 目前正在进行 syhthems 微服务架构改造，详细进度可查看 project：[syhthems Platform 2.0](https://github.com/ehaut/syhthems-platform/projects/1) 
+**微服务架构改造** 目前正在进行 syhthems 微服务架构改造，详细进度可查看 project：[syhthems Platform 2.0](https://github.com/ehaut/syhthems-platform/projects/1) , 分支为 [cloud](https://github.com/ehaut/syhthems-platform/tree/cloud)
 
 ## 平台架构
 
