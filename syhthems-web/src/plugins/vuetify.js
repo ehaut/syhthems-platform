@@ -17,6 +17,7 @@ const MY_ICONS = {
   device: 'fas fa-microchip',
   down: 'fas fa-chevron-down',
   up: 'fas fa-chevron-up',
+  search: 'fas fa-search',
 }
 
 Vue.use(Vuetify)

@@ -24,16 +24,46 @@
       >
         <v-data-iterator
           :items="productVOs"
+          :custom-filter="searchProduct()"
           hide-default-footer
-          row
-          wrap
         >
           <template v-slot:header="{}">
             <v-toolbar
               class="mb-2"
             >
               <v-toolbar-title>产品列表</v-toolbar-title>
-              <v-spacer />
+              <v-row class="mx-auto hidden-sm-and-down">
+                <v-col
+                  cols="4"
+                  offset="4"
+                >
+                  <v-text-field
+                    v-model="search.name"
+                    clearable
+                    hide-details
+                    placeholder="搜索产品名称"
+                    prepend-inner-icon="$vuetify.icons.search"
+                  />
+                </v-col>
+                <v-col
+                  cols="4"
+                >
+                  <v-text-field
+                    v-model="search.description"
+                    clearable
+                    hide-details
+                    placeholder="搜索产品描述"
+                    prepend-inner-icon="$vuetify.icons.search"
+                  />
+                </v-col>
+              </v-row>
+              <v-btn
+                icon
+                class="mr-2"
+                @click="refreshProduct()"
+              >
+                <v-icon>$vuetify.icons.refresh</v-icon>
+              </v-btn>
               <v-dialog
                 v-model="newProductDialog"
                 persistent
@@ -108,96 +138,89 @@
               </v-dialog>
             </v-toolbar>
           </template>
-          <template v-slot:no-data="{ on }">
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-              offset="0"
-              offset-sm="3"
-              offset-md="4"
-              v-on="on"
-            >
-              <v-alert
-                type="error"
-              >
-                该账户下没有产品，新建？
-              </v-alert>
-            </v-col>
+          <template v-slot:no-data>
+            <syhthems-no-data>该账户下没有产品，新建？</syhthems-no-data>
+          </template>
+          <template v-slot:no-results>
+            <syhthems-no-results />
           </template>
 
-          <template v-slot:item="props">
-            <v-col
-              cols="12"
-              sm="6"
-              md="4"
-            >
-              <v-card>
-                <v-hover>
-                  <v-img slot-scope="{ hover }">
-                    <v-expand-transition>
-                      <v-card
-                        v-if="hover"
-                        class="d-flex transition-fast-in-fast-out blue darken-3 v-card--reveal text-center headline white--text"
-                        style="height: 100%;"
-                        hover
-                        raised
-                        tile
-                        @click="choiceProduct(props.item)"
-                      >
-                        <v-card-text>
-                          选择该产品
-                        </v-card-text>
-                      </v-card>
-                    </v-expand-transition>
-                    <v-container
-                      class="fill-height"
-                      fluid
-                    >
-                      <v-row class="fill-height">
-                        <v-col
-                          class="align-end flexbox"
-                          cols="12"
+          <template v-slot:default="props">
+            <v-row>
+              <v-col
+                v-for="item in props.items"
+                :key="item.product.productId"
+                cols="12"
+                sm="6"
+                md="4"
+              >
+                <v-card>
+                  <v-hover>
+                    <v-img slot-scope="{ hover }">
+                      <v-expand-transition>
+                        <v-card
+                          v-if="hover"
+                          class="d-flex transition-fast-in-fast-out blue darken-3 v-card--reveal text-center headline white--text"
+                          style="height: 100%;"
+                          hover
+                          raised
+                          tile
+                          @click="choiceProduct(item)"
                         >
-                          <h4>{{ props.item.product.name }}</h4>
-                        </v-col>
-                      </v-row>
-                    </v-container>
-                  </v-img>
-                </v-hover>
-                <v-card-text
-                  class="body-1"
-                >
-                  {{ props.item.product.description }}
-                </v-card-text>
-                <v-divider />
-                <v-list dense>
-                  <v-list-item>
-                    <v-list-item-content>设备:</v-list-item-content>
-                    <v-list-item-content class="align-end">
-                      {{ isEmpty(props.item.devices) ? 0 : props.item.devices.length }} 个
-                    </v-list-item-content>
-                  </v-list-item>
-                  <v-list-item>
-                    <v-list-item-content>数据流:</v-list-item-content>
-                    <v-list-item-content class="align-end">
-                      {{ isEmpty(props.item.dataStreams) ? 0 : props.item.dataStreams.length }} 个
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-                <v-divider />
-                <v-card-actions>
-                  <v-btn
-                    dark
-                    class="align-start"
-                    color="warning"
-                    @click="deleteProduct(props.item.product.productId)"
+                          <v-card-text class="headline green--text">
+                            选择该产品
+                          </v-card-text>
+                        </v-card>
+                      </v-expand-transition>
+                      <v-container
+                        class="fill-height"
+                        fluid
+                      >
+                        <v-row class="fill-height">
+                          <v-col
+                            class="align-end flexbox"
+                            cols="12"
+                          >
+                            <h4>{{ item.product.name }}</h4>
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                    </v-img>
+                  </v-hover>
+                  <v-card-text
+                    class="body-1"
                   >
-                    删除
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-col>
+                    {{ item.product.description }}
+                  </v-card-text>
+                  <v-divider />
+                  <v-list dense>
+                    <v-list-item>
+                      <v-list-item-content>设备:</v-list-item-content>
+                      <v-list-item-content class="align-end">
+                        {{ isEmpty(item.devices) ? 0 : item.devices.length }} 个
+                      </v-list-item-content>
+                    </v-list-item>
+                    <v-list-item>
+                      <v-list-item-content>数据流:</v-list-item-content>
+                      <v-list-item-content class="align-end">
+                        {{ isEmpty(item.dataStreams) ? 0 : item.dataStreams.length }} 个
+                      </v-list-item-content>
+                    </v-list-item>
+                  </v-list>
+                  <v-divider />
+                  <v-card-actions>
+                    <v-btn
+                      dark
+                      class="align-start"
+                      color="warning"
+                      @click="deleteProduct(item.product.productId)"
+                    >
+                      删除
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
           </template>
         </v-data-iterator>
       </v-container>
@@ -207,10 +230,13 @@
 
 <script>
   import qs from 'qs'
+  import SyhthemsNoData from '../components/SyhthemsNoData'
+  import SyhthemsNoResults from "../components/SyhthemsNoResults";
   const _ = require('lodash/core')
 
   export default {
     name: 'Home',
+    components: {SyhthemsNoResults, SyhthemsNoData },
     data: () => ({
       productVOs: [],
       pagination: {
@@ -243,6 +269,10 @@
         },
       },
       newProductDialog: false,
+      search: {
+        name: '',
+        description: '',
+      },
     }),
     mounted () {
       console.log('Home mounted...')
@@ -268,8 +298,7 @@
           this.$store.commit('setGlobalLoading', true)
           this.addProductForm.model.userId = this.$store.state.userDetails.user.userId
           this.$http.post('/product', qs.stringify(this.addProductForm.model)).then(res => {
-            this.getProducts()
-            this.clearAddProductForm()
+            this.refreshProduct()
           }).catch(reason => {
             //
           }).finally(() => setTimeout(() => this.$store.commit('setGlobalLoading', false), 500))
@@ -281,7 +310,9 @@
           name: '',
           description: '',
         }
-        this.$refs.newProductForm.resetValidation()
+        if (this.$refs.newProductForm && this.$refs.newProductForm.resetValidation) {
+          this.$refs.newProductForm.resetValidation()
+        }
         this.newProductDialog = false
       },
       deleteProduct (productId) {
@@ -317,6 +348,21 @@
           // this.$store.commit('setProductVO', productVO)
           // this.$store.commit('setDrawer', true)
           return this.$router.push({ path: `/product/${productVO.product.productId}/` })
+        }
+      },
+      refreshProduct () {
+        this.getProducts()
+        this.clearAddProductForm()
+      },
+      searchProduct () {
+        return () => {
+          if (this.productVOs && this.productVOs.length) {
+            return this.productVOs.filter(value => {
+              return (value.product.name.search('.*' + this.search.name + '.*') >= 0 && value.product.description.search('.*' + this.search.description + '.*') >= 0)
+            })
+          } else {
+            return this.productVOs
+          }
         }
       },
     },
