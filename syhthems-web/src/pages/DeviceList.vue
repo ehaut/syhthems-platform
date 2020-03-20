@@ -31,7 +31,7 @@
             wrap
             justify-space-between
           >
-            <template v-slot:header="">
+            <template v-slot:header>
               <v-toolbar
                 class="mb-2"
               >
@@ -40,7 +40,7 @@
                 <v-dialog
                   v-model="newDeviceDialog"
                   persistent
-                  max-width="400px"
+                  max-width="500px"
                 >
                   <template v-slot:activator="{ on }">
                     <v-btn
@@ -97,7 +97,7 @@
                                 :type="newDeviceFormScheme.fields.deviceSecret.type"
                                 readonly
                               >
-                                <template v-slot:append="">
+                                <template v-slot:append>
                                   <v-btn
                                     small
                                     color="primary"
@@ -148,81 +148,84 @@
                 </v-dialog>
               </v-toolbar>
             </template>
-            <template v-slot:item="props">
-              <v-col
-                cols="12"
-                sm="6"
-                md="5"
-              >
-                <v-card
-                  hover
-                  @click="choiceDevice(props.item.deviceId)"
+            <template v-slot:default="props">
+              <v-row>
+                <v-col
+                  v-for="item in props.items"
+                  :key="item.deviceId"
+                  cols="12"
+                  sm="6"
                 >
-                  <v-list dense>
-                    <v-list-item>
-                      <v-list-item-content class="title">
-                        设备ID：
-                      </v-list-item-content>
-                      <v-list-item-content class="align-end">
-                        {{ props.item.deviceId }}
-                      </v-list-item-content>
-                    </v-list-item>
+                  <v-card
+                    hover
+                    @click="choiceDevice(item.deviceId)"
+                  >
+                    <v-list dense>
+                      <v-list-item>
+                        <v-list-item-content class="title">
+                          设备ID：
+                        </v-list-item-content>
+                        <v-list-item-content class="align-end">
+                          {{ item.deviceId }}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-divider />
+                      <v-list-item>
+                        <v-list-item-content>设备密钥： </v-list-item-content>
+                        <v-list-item-content class="align-end">
+                          {{ item.deviceSecret }}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-divider />
+                      <v-list-item>
+                        <v-list-item-content>设备编号：</v-list-item-content>
+                        <v-list-item-content class="align-end">
+                          {{ item.code }}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-divider />
+                      <v-list-item>
+                        <v-list-item-content>设备名称：</v-list-item-content>
+                        <v-list-item-content class="align-end">
+                          {{ item.name }}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-divider />
+                      <v-list-item>
+                        <v-list-item-content> 设备简介：</v-list-item-content>
+                        <v-list-item-content class="align-end">
+                          {{ item.description }}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-divider />
+                      <v-list-item>
+                        <v-list-item-content> 设备标签：</v-list-item-content>
+                        <v-list-item-content class="align-end">
+                          {{ item.tags }}
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list>
                     <v-divider />
-                    <v-list-item>
-                      <v-list-item-content>设备密钥： </v-list-item-content>
-                      <v-list-item-content class="align-end">
-                        {{ props.item.deviceSecret }}
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-divider />
-                    <v-list-item>
-                      <v-list-item-content>设备编号：</v-list-item-content>
-                      <v-list-item-content class="align-end">
-                        {{ props.item.code }}
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-divider />
-                    <v-list-item>
-                      <v-list-item-content>设备名称：</v-list-item-content>
-                      <v-list-item-content class="align-end">
-                        {{ props.item.name }}
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-divider />
-                    <v-list-item>
-                      <v-list-item-content> 设备简介：</v-list-item-content>
-                      <v-list-item-content class="align-end">
-                        {{ props.item.description }}
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-divider />
-                    <v-list-item>
-                      <v-list-item-content> 设备标签：</v-list-item-content>
-                      <v-list-item-content class="align-end">
-                        {{ props.item.tags }}
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
-                  <v-divider />
-                  <v-card-actions>
-                    <v-btn
-                      dark
-                      color="warning"
-                      @click.stop="deleteDevice(props.item.deviceId)"
-                    >
-                      删除
-                    </v-btn>
-                    <v-spacer />
-                    <v-btn
-                      dark
-                      color="info"
-                      @click.stop="updateDeviceButton(props.item)"
-                    >
-                      修改
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-col>
+                    <v-card-actions>
+                      <v-btn
+                        dark
+                        color="warning"
+                        @click.stop="deleteDevice(item.deviceId)"
+                      >
+                        删除
+                      </v-btn>
+                      <v-spacer />
+                      <v-btn
+                        dark
+                        color="info"
+                        @click.stop="updateDeviceButton(item)"
+                      >
+                        修改
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+              </v-row>
             </template>
           </v-data-iterator>
         </v-container>
@@ -277,7 +280,7 @@
                     :type="updateDeviceFormScheme.fields.deviceSecret.type"
                     readonly
                   >
-                    <template v-slot:append="">
+                    <template v-slot:append>
                       <v-btn
                         small
                         color="primary"
