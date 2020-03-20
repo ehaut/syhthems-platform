@@ -52,7 +52,7 @@
                     v-model="search.description"
                     clearable
                     hide-details
-                    placeholder="搜索产品描述"
+                    placeholder="搜索产品简介"
                     prepend-inner-icon="$vuetify.icons.search"
                   />
                 </v-col>
@@ -153,6 +153,7 @@
                 cols="12"
                 sm="6"
                 md="4"
+                lg="3"
               >
                 <v-card>
                   <v-hover>
@@ -190,7 +191,7 @@
                   <v-card-text
                     class="body-1"
                   >
-                    {{ item.product.description }}
+                    {{ isEmpty(item.product.description) ? '无产品简介' : item.product.description }}
                   </v-card-text>
                   <v-divider />
                   <v-list dense>
@@ -231,12 +232,12 @@
 <script>
   import qs from 'qs'
   import SyhthemsNoData from '../components/SyhthemsNoData'
-  import SyhthemsNoResults from "../components/SyhthemsNoResults";
+  import SyhthemsNoResults from '../components/SyhthemsNoResults'
   const _ = require('lodash/core')
 
   export default {
     name: 'Home',
-    components: {SyhthemsNoResults, SyhthemsNoData },
+    components: { SyhthemsNoResults, SyhthemsNoData },
     data: () => ({
       productVOs: [],
       pagination: {
@@ -260,10 +261,10 @@
           },
           description: {
             type: 'text',
-            label: '产品描述',
+            label: '产品简介',
             required: false,
             rules: [
-              v => (v.length <= 100) || '产品描述最多只能有100个字符',
+              v => (v.length <= 100) || '产品简介最多只能有100个字符',
             ],
           },
         },
@@ -357,9 +358,21 @@
       searchProduct () {
         return () => {
           if (this.productVOs && this.productVOs.length) {
-            return this.productVOs.filter(value => {
-              return (value.product.name.search('.*' + this.search.name + '.*') >= 0 && value.product.description.search('.*' + this.search.description + '.*') >= 0)
-            })
+            console.log('name:' + this.search.name + 'description:' + this.search.description)
+            let results = this.productVOs
+            if (!_.isEmpty(this.search.name)) {
+              console.log('name:' + this.search.name)
+              results = results.filter(value => {
+                return (value.product.name.search('.*' + this.search.name + '.*') >= 0)
+              })
+            }
+            if (!_.isEmpty(this.search.description)) {
+              console.log('description:' + this.search.description)
+              results = results.filter(value => {
+                return (value.product.description.search('.*' + this.search.description + '.*') >= 0)
+              })
+            }
+            return results
           } else {
             return this.productVOs
           }
