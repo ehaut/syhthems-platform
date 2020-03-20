@@ -30,7 +30,7 @@
             row
             wrap
           >
-            <template v-slot:header="">
+            <template v-slot:header>
               <v-toolbar
                 class="mb-2"
               >
@@ -119,57 +119,62 @@
                 </v-dialog>
               </v-toolbar>
             </template>
-            <template v-slot:item="props">
-              <v-col
-                cols="12"
-                sm="6"
-                md="4"
-              >
-                <v-card>
-                  <v-list dense>
-                    <v-list-item>
-                      <v-list-item-content class="title">
-                        数据流编码：
-                      </v-list-item-content>
-                      <v-list-item-content class="align-end title">
-                        {{ props.item.dataStreamCode }}
-                      </v-list-item-content>
-                    </v-list-item>
+            <template v-slot:default="props">
+              <v-row>
+                <v-col
+                  v-for="item in props.items"
+                  :key="item.dataStreamId"
+                  cols="12"
+                  sm="6"
+                  md="4"
+                  lg="3"
+                >
+                  <v-card>
+                    <v-list dense>
+                      <v-list-item>
+                        <v-list-item-content class="title">
+                          数据流编码：
+                        </v-list-item-content>
+                        <v-list-item-content class="align-end title">
+                          {{ item.dataStreamCode }}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-divider />
+                      <v-list-item>
+                        <v-list-item-content>数据流单位： </v-list-item-content>
+                        <v-list-item-content class="align-end">
+                          {{ item.unit }}
+                        </v-list-item-content>
+                      </v-list-item>
+                      <v-divider />
+                      <v-list-item>
+                        <v-list-item-content>数据流单位符号：</v-list-item-content>
+                        <v-list-item-content class="align-end">
+                          {{ item.unitSymbol }}
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list>
                     <v-divider />
-                    <v-list-item>
-                      <v-list-item-content>数据流单位： </v-list-item-content>
-                      <v-list-item-content class="align-end">
-                        {{ props.item.unit }}
-                      </v-list-item-content>
-                    </v-list-item>
-                    <v-divider />
-                    <v-list-item>
-                      <v-list-item-content>数据流单位符号：</v-list-item-content>
-                      <v-list-item-content class="align-end">
-                        {{ props.item.unitSymbol }}
-                      </v-list-item-content>
-                    </v-list-item>
-                  </v-list>
-                  <v-divider />
-                  <v-card-actions>
-                    <v-btn
-                      dark
-                      color="warning"
-                      @click="deleteDataStream(props.item.dataStreamId)"
-                    >
-                      删除
-                    </v-btn>
-                    <v-spacer />
-                    <v-btn
-                      dark
-                      color="info"
-                      @click.stop="updateDataStreamButton(props.item)"
-                    >
-                      修改
-                    </v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-col>
+                    <v-card-actions>
+                      <v-btn
+                        dark
+                        color="warning"
+                        @click="deleteDataStream(item.dataStreamId)"
+                      >
+                        删除
+                      </v-btn>
+                      <v-spacer />
+                      <v-btn
+                        dark
+                        color="info"
+                        @click.stop="updateDataStreamButton(item)"
+                      >
+                        修改
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-col>
+              </v-row>
             </template>
           </v-data-iterator>
         </v-container>
@@ -280,18 +285,18 @@
           },
           unit: {
             type: 'text',
-            label: '数据单位',
+            label: '数据流单位',
             required: true,
             rules: [
-              v => !!v || '数据单位必输',
+              v => !!v || '数据流单位必输',
             ],
           },
           unitSymbol: {
             type: 'text',
-            label: '数据单位符号',
+            label: '数据流单位符号',
             required: true,
             rules: [
-              v => !!v || '数据单位符号必输',
+              v => !!v || '数据流单位符号必输',
             ],
           },
         },
