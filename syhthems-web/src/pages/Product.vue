@@ -47,7 +47,7 @@
                   </h5>
                 </v-card-text>
                 <v-divider />
-                <v-card-text>{{ productVO ? productVO.product.description : '' }}</v-card-text>
+                <v-card-text>{{ isEmpty(productVO) || isEmpty(productVO.product.description) ? '该产品无产品简介' : productVO.product.description }}</v-card-text>
               </v-card>
             </v-col>
             <v-col sm="5">
@@ -210,6 +210,10 @@
       this.getProductVO()
     },
     methods: {
+      isEmpty (value) {
+        return _.isEmpty(value)
+      },
+
       getProductVO () {
         if (!_.isEmpty(this.$route.params) && this.$route.params.productId) {
           this.$store.commit('setGlobalLoading', true)
