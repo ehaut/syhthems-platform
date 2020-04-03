@@ -2,6 +2,7 @@ package top.sunriseydy.syhthems.db.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -11,6 +12,8 @@ import top.sunriseydy.syhthems.common.constants.BaseConstants;
 import top.sunriseydy.syhthems.common.enums.ResultEnum;
 import top.sunriseydy.syhthems.common.util.ResultUtils;
 import top.sunriseydy.syhthems.common.vo.ResultVO;
+
+import java.sql.SQLException;
 
 /**
  * 处理数据库乐观锁版本号异常
@@ -31,8 +34,13 @@ public class DBExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({VersionException.class})
     public ResultVO versionExceptionHandler(final VersionException e) {
-        log.error("-----> 数据库版本号验证异常：{}", e.getMessage());
-        e.printStackTrace();
+        log.error("-----> 数据库版本号验证异常：" + e.getMessage(), e.getCause());
         return ResultUtils.error(ResultEnum.DATABASE_OPERATION_ERROR);
+    }
+
+    @ExceptionHandler({SQLException.class, DataAccessException.class})
+    public ResultVO databaseExceptionHandler(final Throwable e) {
+        log.error("-----> 数据库异常：" + e.getMessage(), e.getCause());
+        return ResultUtils.error(ResultEnum.DATABASE_ERROR);
     }
 }
