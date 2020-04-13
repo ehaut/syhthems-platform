@@ -34,13 +34,13 @@ public class DBExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({VersionException.class})
     public ResultVO versionExceptionHandler(final VersionException e) {
-        log.error("-----> 数据库版本号验证异常：" + e.getMessage(), e.getCause());
+        log.error("-----> 数据库版本号验证异常：" + e.getMessage(), e);
         return ResultUtils.error(ResultEnum.DATABASE_OPERATION_ERROR);
     }
 
     @ExceptionHandler({SQLException.class, DataAccessException.class})
     public ResultVO databaseExceptionHandler(final Throwable e) {
-        log.error("-----> 数据库异常：" + e.getMessage(), e.getCause());
+        log.error("-----> 数据库异常：" + e.getMessage(), e);
         return ResultUtils.error(ResultEnum.DATABASE_ERROR);
     }
 }
