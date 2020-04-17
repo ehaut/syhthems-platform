@@ -19,7 +19,6 @@ eureka:
     service-url:
       defaultZone: ${SYHTHEMS_EUREKA_DEFAULT_ZONE:http://eureka.syhthems.local:7000/eureka/}
   instance:
-    instance-id: syhthems-sso-7010
     prefer-ip-address: true     #访问路径可以显示IP地址
 
 management:
