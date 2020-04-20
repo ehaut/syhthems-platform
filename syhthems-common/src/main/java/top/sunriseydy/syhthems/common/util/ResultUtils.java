@@ -19,7 +19,7 @@ public class ResultUtils {
      * @return ResultVO 返回结果类
      */
     public static <T> ResultVO<T> success(T data) {
-        return new ResultVO<>(ResultEnum.SUCCESS.getKey(), ResultEnum.SUCCESS.getValue(), data);
+        return new ResultVO<>(true, ResultEnum.SUCCESS.getKey(), ResultEnum.SUCCESS.getValue(), data);
     }
 
     public static <T> ResultVO<T> success() {
@@ -34,7 +34,7 @@ public class ResultUtils {
      * @return ResultVO 返回结果类
      */
     public static <T> ResultVO<T> error(Integer code, String message, T data) {
-        return new ResultVO<>(code, message, data);
+        return new ResultVO<>(false, code, message, data);
     }
 
     public static <T> ResultVO<T> error(Integer code, String message) {

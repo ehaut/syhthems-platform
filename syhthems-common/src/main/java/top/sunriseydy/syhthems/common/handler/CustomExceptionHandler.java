@@ -46,7 +46,7 @@ import java.util.stream.Collectors;
 public class CustomExceptionHandler {
 
     @ExceptionHandler({SystemException.class})
-    public ResultVO systemExceptionHandler(final SystemException e) {
+    public ResultVO<Object> systemExceptionHandler(final SystemException e) {
         log.error("-----> 系统异常：{}", e.getMessage());
         log.error("错误信息:", e);
         return ResultUtils.error(e.getResultEnum().getKey(), e.getMessage());
@@ -59,35 +59,35 @@ public class CustomExceptionHandler {
      * @return ResultEnum.ILLEGAL_ARGUMENT
      */
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResultVO illegalArgumentExceptionHandler(final IllegalArgumentException e) {
+    public ResultVO<Object> illegalArgumentExceptionHandler(final IllegalArgumentException e) {
         log.error("-----> 参数异常：{}", e.getMessage());
         log.error("错误信息:", e);
         return ResultUtils.error(ResultEnum.ILLEGAL_ARGUMENT.getKey(), e.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResultVO methodArgumentTypeMismatchExceptionHandler(final MethodArgumentTypeMismatchException e) {
+    public ResultVO<Object> methodArgumentTypeMismatchExceptionHandler(final MethodArgumentTypeMismatchException e) {
         log.error("-----> Controller 参数异常：{}", e.getMessage());
         log.error("错误信息:", e);
-        return ResultUtils.error(ResultEnum.ILLEGAL_CONTROLLER_ARGUMENT);
+        return ResultUtils.error(ResultEnum.ILLEGAL_CONTROLLER_ARGUMENT.getKey(), e.getMessage());
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
-    public ResultVO missingServletRequestParameterExceptionHandler(final MissingServletRequestParameterException e) {
+    public ResultVO<Object> missingServletRequestParameterExceptionHandler(final MissingServletRequestParameterException e) {
         log.error("-----> Controller 缺少参数异常：{}", e.getMessage());
         log.error("错误信息:", e);
-        return ResultUtils.error(ResultEnum.MISSING_SERVLET_REQUEST_PARAMETER);
+        return ResultUtils.error(ResultEnum.MISSING_SERVLET_REQUEST_PARAMETER.getKey(), e.getMessage());
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResultVO httpMessageNotReadableExceptionHandler(final HttpMessageNotReadableException e) {
+    public ResultVO<Object> httpMessageNotReadableExceptionHandler(final HttpMessageNotReadableException e) {
         log.error("-----> 请求参数读取异常：{}", e.getMessage());
         log.error("错误信息:", e);
-        return ResultUtils.error(ResultEnum.HTTP_MESSAGE_NOT_READABLE);
+        return ResultUtils.error(ResultEnum.HTTP_MESSAGE_NOT_READABLE.getKey(), e.getMessage());
     }
 
     @ExceptionHandler(ValidationException.class)
-    public Object badArgumentExceptionHandler(ValidationException e) {
+    public ResultVO<Object> badArgumentExceptionHandler(ValidationException e) {
         log.error("-----> 请求参数错误：{}", e.getMessage());
         log.error("错误信息:", e);
         if (e instanceof ConstraintViolationException) {
@@ -98,11 +98,11 @@ public class CustomExceptionHandler {
                     .collect(Collectors.joining(","));
             return ResultUtils.error(ResultEnum.ILLEGAL_CONTROLLER_ARGUMENT.getKey(), message);
         }
-        return ResultUtils.error(ResultEnum.ILLEGAL_CONTROLLER_ARGUMENT);
+        return ResultUtils.error(ResultEnum.ILLEGAL_CONTROLLER_ARGUMENT.getKey(), e.getMessage());
     }
 
     @ExceptionHandler(BindException.class)
-    public Object bindExceptionHandler(BindException e) {
+    public ResultVO<Object> bindExceptionHandler(BindException e) {
         log.error("-----> 请求参数错误：{}", e.getMessage());
         log.error("错误信息:", e);
         String message = "";
@@ -115,14 +115,14 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler({ServiceException.class})
-    public ResultVO serviceExceptionHandler(final ServiceException e) {
+    public ResultVO<Object> serviceExceptionHandler(final ServiceException e) {
         log.error("-----> 服务异常：{}", e.getMessage());
         log.error("错误信息:", e);
         return ResultUtils.error(e.getResultEnum().getKey(), e.getMessage());
     }
 
     @ExceptionHandler({BadCredentialsException.class, AuthenticationException.class})
-    public ResultVO authenticationExceptionHandler(final Throwable e) {
+    public ResultVO<Object> authenticationExceptionHandler(final Throwable e) {
         log.error("-----> 身份认证异常：{}", e.getMessage());
         log.error("错误信息:", e);
         return ResultUtils.error(ResultEnum.AUTHENCATION_ERROR);
@@ -136,14 +136,14 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler({UsernameNotFoundException.class})
-    public ResultVO accountNotFoundExceptionHandler(final Throwable e) {
+    public ResultVO<Object> accountNotFoundExceptionHandler(final Throwable e) {
         log.error("-----> 账号不存在异常：{}", e.getMessage());
         log.error("错误信息:", e);
         return ResultUtils.error(ResultEnum.ACCOUNT_NOT_FOUND_ERROR);
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
-    public ResultVO urlNotFoundExceptionHandler(final HttpServletRequest request, final Throwable e) {
+    public ResultVO<Object> urlNotFoundExceptionHandler(final HttpServletRequest request, final Throwable e) {
         log.error("-----> {} URL不存在异常：{}", request.getRequestURI(), e.getMessage());
         log.error("错误信息:", e);
         return ResultUtils.error(ResultEnum.URL_NOT_FOUND);
@@ -155,7 +155,7 @@ public class CustomExceptionHandler {
      * @return ResultVO
      */
     @ExceptionHandler(OAuth2Exception.class)
-    public ResultVO oAuth2ExceptionHandler(OAuth2Exception e) {
+    public ResultVO<Object> oAuth2ExceptionHandler(OAuth2Exception e) {
         log.error("-----> OAuth2 认证异常：{}", e.getOAuth2ErrorCode());
         log.error("错误信息:", e);
         return ResultUtils.error(ResultEnum.AUTHENCATION_ERROR.getKey(), e.getOAuth2ErrorCode());
@@ -179,7 +179,7 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler({Exception.class})
-    public ResultVO globalExceptionHandler(final Exception e) {
+    public ResultVO<Object> globalExceptionHandler(final Exception e) {
         log.error("-----> 全局异常：{} : {}", e.getClass().getName(), e.getMessage());
         log.error("错误信息:", e);
         return ResultUtils.error(ResultEnum.BASE_ERROR.getKey(), e.getClass().getName() + ": " + e.getMessage());
