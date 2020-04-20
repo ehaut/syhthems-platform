@@ -84,6 +84,8 @@ public enum ResultEnum implements BaseEnum<Integer, String> {
     DEVICE_NOT_FOUND(15, "设备不存在"),
 
     DATA_STREAM_NOT_FOUND(16, "数据流不存在"),
+
+    FEIGN_ERROR(17, "feign 请求出错"),
     ;
 
     /**

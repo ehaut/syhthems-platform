@@ -1,5 +1,6 @@
 package top.sunriseydy.syhthems.common.handler;
 
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
 import org.springframework.security.oauth2.provider.error.DefaultWebResponseExceptionTranslator;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -157,6 +159,23 @@ public class CustomExceptionHandler {
         log.error("-----> OAuth2 认证异常：{}", e.getOAuth2ErrorCode());
         log.error("错误信息:", e);
         return ResultUtils.error(ResultEnum.AUTHENCATION_ERROR.getKey(), e.getOAuth2ErrorCode());
+    }
+
+    /**
+     * FeignException 异常处理
+     * @param e FeignException
+     * @return ResultVO
+     */
+    @ExceptionHandler(FeignException.class)
+    public ResultVO<Object> feignExceptionHandler(FeignException e) {
+        log.error("-----> feign 请求异常：{}", e.getMessage());
+        if (e.hasRequest()) {
+            log.error("请求：{}", e.request().toString());
+        }
+        if (StringUtils.hasText(e.contentUTF8())) {
+            log.error("响应：{}", e.contentUTF8());
+        }
+        return ResultUtils.error(ResultEnum.FEIGN_ERROR);
     }
 
     @ExceptionHandler({Exception.class})
