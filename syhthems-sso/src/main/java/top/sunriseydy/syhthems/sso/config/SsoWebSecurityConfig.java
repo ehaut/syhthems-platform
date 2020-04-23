@@ -26,6 +26,8 @@ import top.sunriseydy.syhthems.sso.handler.CustomAuthenticationFailureHandler;
 import top.sunriseydy.syhthems.sso.handler.CustomAuthenticationSuccessHandler;
 import top.sunriseydy.syhthems.sso.handler.CustomLogoutSuccessHandler;
 
+import static top.sunriseydy.syhthems.common.constants.BaseConstants.API_DOC_PATH;
+
 /**
  * WebSecurity配置类
  *
@@ -98,6 +100,7 @@ public class SsoWebSecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
                 .authorizeRequests()
                     .antMatchers("/error",
+                            API_DOC_PATH,
                             "/actuator/*",
                             "/.well-known/*",
                             "/register",
