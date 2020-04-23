@@ -62,4 +62,14 @@ public class BaseConstants {
      * 默认的用户密码；syhthems(加密过的)
      */
     public static final String DEFAULT_USER_PASSWORD = "$2a$10$c9vFTclwXCqg71Xu1anhEeixmr5m0.N.i.pFt96qHQKsmco2E2eBe";
+
+    /**
+     * 获取 swagger API 文档信息的路径
+     */
+    public static final String API_DOC_PATH = "/v2/api-docs";
+
+    /**
+     * 空的 json
+     */
+    public static final String EMPTY_JSON = "{}";
 }
