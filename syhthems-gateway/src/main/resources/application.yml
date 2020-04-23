@@ -37,6 +37,9 @@ zuul:
     api:
       path: /api/**
       serviceId: syhthems-api
+    swagger:
+      path: /swagger/**
+      serviceId: syhthems-swagger
   ignored-services: "*"
   sensitiveHeaders: Cookie,Set-Cookie
   add-host-header: true
