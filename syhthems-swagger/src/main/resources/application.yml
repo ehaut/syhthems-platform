@@ -1,0 +1,32 @@
+server:
+  port: 7030
+
+spring:
+  application:
+    name: syhthems-swagger
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${SYHTHEMS_EUREKA_DEFAULT_ZONE:http://eureka.syhthems.local:7000/eureka/}
+  instance:
+    prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, health, info
+
+info:
+  app.name: ${spring.application.name}
+  app.java.version: @java.version@
+  app.java.runtime-version: @java.runtime.version@
+  app.spring-boot.version: @spring-boot.version@
+  app.spring-cloud.version: @spring-cloud-dependencies.version@
+  build.artifactId: @project.artifactId@
+  build.version: @project.version@
+
+logging:
+  level:
+    top.sunriseydy.syhthems: debug
