@@ -33,6 +33,8 @@
         <module>syhthems-device</module>
         <module>syhthems-eureka</module>
         <module>syhthems-gateway</module>
+        <module>syhthems-swagger</module>
+        <module>syhthems-swagger-spring-boot-starter</module>
     </modules>
 
     <properties>
@@ -52,6 +54,8 @@
         <syhthems-sso.version>0.0.1-SNAPSHOT</syhthems-sso.version>
         <syhthems-web-api.version>0.0.1-SNAPSHOT</syhthems-web-api.version>
         <syhthems-device.version>0.0.1-SNAPSHOT</syhthems-device.version>
+        <syhthems-swagger.version>0.0.1-SNAPSHOT</syhthems-swagger.version>
+        <syhthems-swagger-spring-boot-starter.version>0.0.1-SNAPSHOT</syhthems-swagger-spring-boot-starter.version>
 
         <!-- 各依赖的版本号 -->
         <lombok.version>1.18.10</lombok.version>
@@ -67,6 +71,8 @@
         <spring-session-redis.version>2.1.9.RELEASE</spring-session-redis.version>
         <nimbus-jose-jwt.version>7.1</nimbus-jose-jwt.version>
         <spring-security.version>5.2.1.RELEASE</spring-security.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <guava.version>29.0-jre</guava.version>
     </properties>
 
     <dependencyManagement>
@@ -127,6 +133,16 @@
                 <groupId>top.sunriseydy</groupId>
                 <artifactId>syhthems-device</artifactId>
                 <version>${syhthems-device.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.sunriseydy</groupId>
+                <artifactId>syhthems-swagger-spring-boot-starter</artifactId>
+                <version>${syhthems-swagger-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.sunriseydy</groupId>
+                <artifactId>syhthems-swagger</artifactId>
+                <version>${syhthems-swagger.version}</version>
             </dependency>
 
             <dependency>
@@ -192,6 +208,7 @@
                 <version>${tk.mybatis.mapper.version}</version>
             </dependency>
 
+            <!-- redis 相关依赖 -->
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
@@ -202,6 +219,29 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
+            </dependency>
+
+            <!-- swagger 相关依赖 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-bean-validators</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+            <!-- guava 依赖 -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
         </dependencies>
