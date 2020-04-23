@@ -13,6 +13,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import top.sunriseydy.syhthems.common.properties.CorsProperties;
 import top.sunriseydy.syhthems.web.converter.CustomJwtAuthenticationConverter;
 
+import static top.sunriseydy.syhthems.common.constants.BaseConstants.API_DOC_PATH;
+
 /**
  * WebSecurity 配置
  *
@@ -35,6 +37,7 @@ public class WebApiWebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * CORS 配置类
      * <p>Reference: https://docs.spring.io/spring-security/site/docs/current/reference/htmlsingle/#cors</p>
+     *
      * @return webApiCorsConfigurationSource
      */
     // @Bean
@@ -53,12 +56,14 @@ public class WebApiWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .authorizeRequests()
-                .antMatchers("/error", "/actuator/*").permitAll()
+                .authorizeRequests()
+                .antMatchers("/error",
+                        API_DOC_PATH,
+                        "/actuator/*").permitAll()
                 .anyRequest().authenticated()
-            .and()
+                .and()
                 .oauth2ResourceServer().jwt().jwtAuthenticationConverter(webApiCustomJwtAuthenticationConverter())
-            .and().and()
+                .and().and()
                 .csrf().disable();
     }
 }
